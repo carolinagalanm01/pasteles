@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Pizza</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #bc988f;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        select, input, button {
+            display: block;
+            margin: 10px auto;
+            padding: 8px;
+            width: 80%;
+            max-width: 250px;
+        }
+        button {
+            background-color: #4c79af;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Haz tu Pedido</h1>
+    <div class="container">
+        <form id="formPedido">
+            <!-- Fecha de Pedido -->
+            <label for="fecha">Fecha del Pedido:</label>
+            <input type="date" id="fecha" required>
+            
+            <input type="text" id="nombre" placeholder="Tu Nombre" required>
+            
+            <label>Pastel 1:</label>
+            <select id="pastel1">
+                <option value="3leches">Ninguna</option>
+                <option value="fresa">fresa ($100)</option>
+                <option value="chocolate">chocolate($100)</option>
+            </select>
+            <label>cupcake 2:</label>
+            <select id="cupcake2">
+                <option value="chocolate">Ninguna</option>
+                <option value="vainilla">vainilla($100)</option>
+                <option value="fresas">fresas ($100)</option>
+            </select>
+            <label>donas 3:</label>
+            <select id="donas3">
+                <option value="chocolate">Ninguna</option>
+                <option value="mocca">mocca ($100)</option>
+                <option value="fresa">fresa ($100)</option>
+            </select>
+            <label>Complementos:</label>
+            <select id="complementos">
+                <option value="Ninguno">Ninguno</option>
+                <option value="chispas">Alitas ($50)</option>
+                <option value="chocolate">Papas ($50)</option>
+            </select>
+            <label>Método de Entrega:</label>
+            <input type="radio" name="metodoEntrega" value="Domicilio" required> Domicilio
+            <input type="radio" name="metodoEntrega" value="Recoger" required> Recoger
+            <button type="submit">Continuar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("formPedido").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const fecha = document.getElementById("fecha").value;
+            const nombre = document.getElementById("nombre").value;
+            const pastel1 = document.getElementById("pastel1").value;
+            const pastel2 = document.getElementById("pastel2").value;
+            const pastel3 = document.getElementById("pastel3").value;
+            const complementos = document.getElementById("complementos").value;
+            const metodoEntrega = document.querySelector('input[name="metodoEntrega"]:checked').value;
+
+            // Guardar datos en localStorage
+            localStorage.setItem("fecha", fecha);
+            localStorage.setItem("nombre", nombre);
+            localStorage.setItem("pastel1", pastel1);
+            localStorage.setItem("pastel2", pastel2);
+            localStorage.setItem("pastel3", pastel3);
+            localStorage.setItem("complementos", complementos);
+            localStorage.setItem("metodoEntrega", metodoEntrega);
+
+            // Si se elige "Domicilio", redirigir a la página de dirección
+            if (metodoEntrega === "Domicilio") {
+                window.location.href = "direccion.html";  // Pide la dirección del usuario
+            } else {
+                window.location.href = "metodo_pago.html";  // Si no, va directamente al pago
+            }
+        });
+    </script>
+    <script src="pipshas.js"></script>
+
+</body>
+</html>

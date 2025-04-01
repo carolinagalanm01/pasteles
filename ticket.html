@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket de Compra</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #3fac;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #00699BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ticket de Compra</h1>
+    <div class="container">
+        <p><strong>Cliente:</strong> <span id="cliente"></span></p>
+        <p><strong>Fecha:</strong> <span id="fecha"></span></p>
+        <p><strong>Pastel1:</strong> <span id="pastel1"></span> - $<span id="precioPastel1"></span></p>
+        <p><strong>Pastel 2:</strong> <span id="pastel2"></span> - $<span id="precioPastel2"></span></p>
+        <p><strong>Pastel 3:</strong> <span id="pastel3"></span> - $<span id="precioPastel3"></span></p>
+        <p><strong>Complementos:</strong> <span id="complementos"></span> - $<span id="precioComplementos"></span></p>
+        <p><strong>Método de Entrega:</strong> <span id="metodoEntrega"></span></p>
+        <p><strong>Método de Pago:</strong> <span id="metodoPago"></span></p>
+        <p><strong>Total:</strong> $<span id="total"></span></p>
+        <p><strong>Dinero Pagado:</strong> $<span id="dineroPagado"></span></p>
+        <button onclick="volverAlInicio()">Volver al Inicio</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Recuperar los datos del pedido
+            const nombre = localStorage.getItem("nombre");
+            const pastel1 = localStorage.getItem("pizza1");
+            const pastel2 = localStorage.getItem("pizza2");
+            const pastel3 = localStorage.getItem("pizza3");
+            const complementos = localStorage.getItem("complementos");
+            const metodoEntrega = localStorage.getItem("metodoEntrega");
+            const metodoPago = localStorage.getItem("metodoPago");
+            const total = localStorage.getItem("total");
+            const fecha = localStorage.getItem("fecha");
+            const dineroPagado = localStorage.getItem("dineroPagado");
+
+            // Precios de las pizzas y complementos
+            const precioPastel = 120;
+            const precioComplemento = 50;
+
+            // Mostrar los datos en el ticket
+            document.getElementById("cliente").innerText = nombre;
+            document.getElementById("pizza1").innerText = pastel1;
+            document.getElementById("pizza2").innerText = pastel2;
+            document.getElementById("pizza3").innerText = pastel3;
+            document.getElementById("complementos").innerText = complementos;
+            document.getElementById("metodoEntrega").innerText = metodoEntrega;
+            document.getElementById("metodoPago").innerText = metodoPago;
+            document.getElementById("total").innerText = total;
+            document.getElementById("fecha").innerText = fecha;
+
+            // Mostrar precios de las pizzas
+            document.getElementById("precioPizza1").innerText = pastel1 !== "Ninguna" ? precioPizza : 0;
+            document.getElementById("precioPizza2").innerText = pastel2 !== "Ninguna" ? precioPizza : 0;
+            document.getElementById("precioPizza3").innerText = pastel3 !== "Ninguna" ? precioPizza : 0;
+
+            // Mostrar precio de los complementos
+            document.getElementById("precioComplementos").innerText = complementos !== "Ninguno" ? precioComplemento : 0;
+
+            // Mostrar dinero pagado si es en efectivo
+            if (metodoPago === "Efectivo") {
+                document.getElementById("dineroPagado").innerText = dineroPagado;
+            } else {
+                document.getElementById("dineroPagado").innerText = "No aplica";
+            }
+        }
+
+        function volverAlInicio() {
+            // Limpiar los datos del localStorage
+            localStorage.clear();
+
+            // Redirigir al inicio
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

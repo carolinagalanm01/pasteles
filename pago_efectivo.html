@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago en Efectivo</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #8facbc;
+            font-family: Arial, sans-serif;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 8px;
+            width: 80%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Cuánto dinero va a dar?</h1>
+
+    <form id="pagoForm">
+        <input type="number" id="dineroPagado" placeholder="Cantidad en efectivo" required>
+
+        <button type="submit">Confirmar Pago</button>
+    </form>
+
+    <script>
+        document.getElementById("pagoForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const dineroPagado = parseFloat(document.getElementById("dineroPagado").value.trim());
+            const total = parseFloat(localStorage.getItem("total"));
+
+            if (dineroPagado < total) {
+                alert("El dinero proporcionado no es suficiente. Intente de nuevo.");
+                return;
+            }
+
+            // Guardar el monto que el usuario ha pagado
+            localStorage.setItem("dineroPagado", dineroPagado);
+
+            // Redirigir a la página de confirmación
+            window.location.href = "confirmacion.html";
+        });
+    </script>
+</body>
+</html>

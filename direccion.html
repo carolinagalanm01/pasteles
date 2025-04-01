@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dirección de Envío</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #a68fbc;
+            font-family: Arial, sans-serif;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 8px;
+            width: 80%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            width: 150px;
+        }
+        .btn-continuar {
+            background-color: #4c85af;
+            color: white;
+        }
+        .btn-regresar {
+            background-color: #d94f7e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ingrese su Dirección de Envío</h1>
+    
+    <form id="direccionForm">
+        <input type="text" id="direccion" placeholder="Dirección" required>
+        <input type="text" id="numeroCasa" placeholder="Número de Casa" required>
+        
+        <button type="submit" class="btn-continuar">Continuar</button>
+        <button type="button" class="btn-regresar" onclick="window.location.href='index.html'">Regresar</button>
+    </form>
+
+    <script>
+        document.getElementById("direccionForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let direccion = document.getElementById("direccion").value.trim();
+            let numeroCasa = document.getElementById("numeroCasa").value.trim();
+
+            if (direccion === "" || numeroCasa === "") {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            localStorage.setItem("direccion", direccion);
+            localStorage.setItem("numeroCasa", numeroCasa);
+            
+            alert("¡Dirección guardada con éxito!");
+            window.location.href = "metodo_pago.html"; // Redirige a la página de pago
+        });
+    </script>
+</body>
+</html>
