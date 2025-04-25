@@ -73,7 +73,7 @@
       margin-left: 10px;
     }
 
-    .carrito, .pago, .envio, .gracias {
+    .carrito, .pago, .envio, .gracias, .confirmacion {
       display: none;
       margin-top: 30px;
       padding: 15px;
@@ -155,12 +155,20 @@
 
   <section class="envio" id="envio-seccion">
     <h3>Envío a domicilio</h3>
-    <p>Tu pedido será enviado a la dirección registrada.</p>
+    <label for="direccion">Dirección de envío:</label>
+    <input type="text" id="direccion" placeholder="Ingresa tu dirección" required>
+  </section>
+
+  <section class="confirmacion" id="confirmacion-seccion">
+    <h3>Confirmación del Pedido</h3>
+    <p id="resumen-pedido"></p>
+    <button onclick="confirmarPedido()">Confirmar Pedido</button>
   </section>
 
   <section class="gracias" id="gracias">
     <p>¡Gracias por comprar en Pastelería Carolina!</p>
     <p>Contacto: contacto@pasteleriacarolina.mx | Tel: 33 1234 5678</p>
+    <button onclick="reiniciarCompra()">Inicio</button>
   </section>
 </main>
 
@@ -222,19 +230,13 @@
     const pago = document.getElementById('pago').value;
     if (pago) {
       document.getElementById('envio-seccion').style.display = 'block';
-      document.getElementById('gracias').style.display = 'block';
     }
   }
 
-  function buscarPasteles() {
-    const texto = document.getElementById('buscador').value.toLowerCase();
-    const pasteles = document.querySelectorAll('.pastel');
-    pasteles.forEach(pastel => {
-      const nombre = pastel.getAttribute('data-nombre').toLowerCase();
-      pastel.style.display = nombre.includes(texto) ? 'block' : 'none';
-    });
-  }
-</script>
+  function confirmarPedido() {
+    const direccion = document.getElementById('direccion').value;
+    const metodoPago = document.getElementById('pago').value;
+    if (direccion && metodoPago) {
+      document.getElementById('confirmacion-seccion').style.display = 'block';
+      let resumen = `Dirección de Envío: ${direccion}<br> Método de Pago
 
-</body>
-</html>
