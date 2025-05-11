@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pastelería Carolina - Los mejores pasteles personalizados para tus eventos especiales en CDMX.">
+  <title>Pastelería Carolina</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Pastelería Carolina</h1>
+    <nav>
+      <a href="#" onclick="mostrarSeccion('inicio')">Inicio</a>
+      <a href="#" onclick="mostrarSeccion('pasteles')">Pasteles</a>
+      <a href="#" onclick="mostrarSeccion('eventos')">Eventos</a>
+      <a href="#" onclick="mostrarSeccion('sucursales')">Sucursales</a>
+      <a href="#" onclick="mostrarSeccion('contacto')">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- Secciones -->
+  <main>
+    <section id="inicio" class="inicio-bg active">
+      <h2>Bienvenidos a Pastelería Carolina</h2>
+      <p>Desde hace más de 40 años, acompañamos tus momentos más dulces con pasteles personalizados para cada ocasión: bodas, cumpleaños, baby showers y más.</p>
+      <img src="chococo.jpg" alt="Pastel grande destacado">
+    </section>
+
+    <section id="pasteles">
+      <h2>Nuestros Pasteles</h2>
+      <div class="pastel">
+        <img src="chicola.jpg" alt="Pastel de chocolate">
+        <p><strong>Pastel de Chocolate</strong></p>
+        <p>Delicioso y cremoso con cobertura de ganache de cacao belga.</p>
+        <p>Precio: $450 MXN (8 porciones)</p>
+      </div>
+      <div class="pastel">
+        <img src="vainilla.jpg" alt="Pastel de vainilla">
+        <p><strong>Pastel de Vainilla</strong></p>
+        <p>Clásico y suave, relleno de crema pastelera y frutas frescas.</p>
+        <p>Precio: $400 MXN (8 porciones)</p>
+      </div>
+      <div class="pastel">
+        <img src="fon.jpg" alt="Pastel de fondant personalizado">
+        <p><strong>Fondant Personalizado</strong></p>
+        <p>Diseños únicos con figuras decorativas comestibles, ideales para eventos.</p>
+        <p>Precio: Desde $700 MXN (depende del diseño)</p>
+      </div>
+      <div class="pastel">
+        <img src="tres.jpg" alt="Pastel de tres leches">
+        <p><strong>Tres Leches</strong></p>
+        <p>Húmedo, dulce y tradicional mexicano, bañado en leche condensada y evaporada.</p>
+        <p>Precio: $480 MXN (10 porciones)</p>
+      </div>
+    </section>
+
+    <section id="eventos">
+      <h2>Eventos Recientes</h2>
+      <div class="evento">
+        <p><strong>Boda de Ana y Luis</strong> – Salón Jardines: pastel de 3 niveles con flores naturales.</p>
+        <img src="jardin.jpg" alt="Pastel de boda Ana y Luis">
+      </div>
+      <div class="evento">
+        <p><strong>Cumpleaños de Sofía</strong> – Temática de ositos: pastel fondant rosa pastel.</p>
+        <img src="osos.jpg" alt="Pastel cumpleaños Sofía">
+      </div>
+      <div class="evento">
+        <p><strong>Graduación U. del Valle</strong> – Pasteles individuales para cada alumno.</p>
+        <img src="graduacion.jpg" alt="Pasteles graduación U del Valle">
+      </div>
+      <div class="evento">
+        <p><strong>Evento empresarial Galletas D’Luxe</strong> – Mini pasteles con branding personalizado.</p>
+        <img src="empresa.jpg" alt="Evento empresarial Galletas D'Luxe">
+      </div>
+    </section>
+
+    <section id="sucursales">
+      <h2>Nuestras Sucursales</h2>
+      <div class="sucursal">
+        <p><strong>Centro:</strong> Calle Reforma #123, CDMX</p>
+        <img src="reforma.jpg" alt="Sucursal Reforma Centro">
+      </div>
+      <div class="sucursal">
+        <p><strong>Sur:</strong> Av. Insurgentes Sur #456, CDMX</p>
+        <img src="sur.jpg" alt="Sucursal Insurgentes Sur">
+      </div>
+      <div class="sucursal">
+        <p><strong>Norte:</strong> Plaza Arcoiris, Naucalpan</p>
+        <img src="descarga.jpg" alt="Sucursal Plaza Arcoiris Naucalpan">
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p><strong>Teléfono:</strong> 55 1234 5678</p>
+      <p><strong>Correo:</strong> contacto@pasteleriacarolina.com</p>
+      <p><strong>Redes Sociales:</strong> Instagram / Facebook / TikTok: @PasteleriaCarolina</p>
+      <p><strong>Horarios:</strong> Lunes a Sábado de 9:00 a 19:00 hrs</p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Pastelería Carolina. Todos los derechos reservados.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
