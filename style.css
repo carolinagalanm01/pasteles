@@ -1,0 +1,46 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff9f3;
+  color: #333;
+}
+
+header {
+  background-color: #ffb6b9;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+section {
+  padding: 2em;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em
+::contentReference[oaicite:0]{index=0}
+ 
