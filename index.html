@@ -2,107 +2,137 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pastelería Dulce Sabor</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header>
     <h1>Pastelería Dulce Sabor</h1>
     <nav>
-      <ul>
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#pasteles">Pasteles</a></li>
-        <li><a href="#eventos">Eventos</a></li>
-        <li><a href="#sucursales">Sucursales</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
+      <a href="#inicio">Inicio</a>
+      <a href="#pasteles">Pasteles</a>
+      <a href="#carrito">Carrito</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#sucursales">Sucursales</a>
+      <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
+  <!-- INICIO -->
   <section id="inicio">
     <h2>Bienvenidos a Dulce Sabor</h2>
-    <img src="img/chicola.jpg" alt="Pastel de Chocolate">
-    <p>Los mejores pasteles artesanales de la ciudad. ¡Hechos con amor y los mejores ingredientes!</p>
+    <img src="inicio-pasteleria.jpg" alt="Pastelería Dulce Sabor" style="width:100%; max-height:400px; object-fit:cover;">
+    <p>Tu pastelería favorita para momentos inolvidables.</p>
   </section>
 
+  <!-- PASTELES -->
   <section id="pasteles">
     <h2>Nuestros Pasteles</h2>
-    <div class="galeria">
-      <div class="pastel">
-        <img src="img/chococo.jpg" alt="Pastel de Chocolate">
-        <h3>Pastel de Chocolate</h3>
-        <p>$250 MXN</p>
-        <button class="agregar-carrito" data-id="1" data-nombre="Pastel de Chocolate" data-precio="250">Agregar al Carrito</button>
-      </div>
-      <div class="pastel">
-        <img src="img/tres.jpg" alt="Pastel de Fresa">
-        <h3>Pastel de Fresa</h3>
-        <p>$300 MXN</p>
-        <button class="agregar-carrito" data-id="2" data-nombre="Pastel de Fresa" data-precio="300">Agregar al Carrito</button>
-      </div>
-      <div class="pastel">
-        <img src="img/vainilla.jpg" alt="Pastel de Vainilla">
-        <h3>Pastel de Vainilla</h3>
-        <p>$200 MXN</p>
-        <button class="agregar-carrito" data-id="3" data-nombre="Pastel de Vainilla" data-precio="200">Agregar al Carrito</button>
-      </div>
-    </div>
+    <div class="pasteles-container" id="pasteles-container"></div>
   </section>
 
+  <!-- CARRITO -->
+  <section id="carrito">
+    <h2>Carrito de Compras</h2>
+    <ul id="lista-carrito"></ul>
+    <p>Total: <span id="total">$0.00</span> MXN</p>
+
+    <label>Método de pago:</label>
+    <select id="metodo-pago">
+      <option value="tarjeta">Tarjeta</option>
+      <option value="efectivo">Efectivo</option>
+    </select>
+    <button onclick="pagar()">Pagar</button>
+
+    <div id="ticket" class="ticket"></div>
+  </section>
+
+  <!-- EVENTOS -->
   <section id="eventos">
     <h2>Eventos Especiales</h2>
-    <ul>
-      <li>🎓 Graduación</li>
-      <li>💍 Boda</li>
-      <li>🎉 Cumpleaños</li>
-    </ul>
+    <div class="eventos-container">
+      <div class="evento">
+        <img src="graduacion.jpg" alt="Graduación">
+        <h3>Graduación</h3>
+        <p>Celebraciones universitarias con pasteles personalizados.</p>
+      </div>
+      <div class="evento">
+        <img src="boda.jpg" alt="Boda">
+        <h3>Boda</h3>
+        <p>Pasteles elegantes para el día más especial de tu vida.</p>
+      </div>
+      <div class="evento">
+        <img src="cumpleaños.jpg" alt="Cumpleaños">
+        <h3>Cumpleaños</h3>
+        <p>Festeja con sabor, color y alegría.</p>
+      </div>
+    </div>
   </section>
 
+  <!-- SUCURSALES -->
   <section id="sucursales">
     <h2>Nuestras Sucursales</h2>
-    <div class="sucursal">
-      <h3>Sucursal Centro</h3>
-      <img src="img/sucursal1.jpg" alt="Sucursal Centro">
-      <p>Dirección: Calle Principal #123, Ciudad</p>
-      <p>Teléfono: +52 123 456 7890</p>
-    </div>
-    <div class="sucursal">
-      <h3>Sucursal Norte</h3>
-      <img src="img/sucursal2.jpg" alt="Sucursal Norte">
-      <p>Dirección: Calle Norte #45, Ciudad</p>
-      <p>Teléfono: +52 123 456 7891</p>
-    </div>
-    <div class="sucursal">
-      <h3>Sucursal Sur</h3>
-      <img src="img/sucursal3.jpg" alt="Sucursal Sur">
-      <p>Dirección: Plaza Sur, Local 8</p>
-      <p>Teléfono: +52 123 456 7892</p>
+    <div class="sucursales-container">
+      <div class="sucursal">
+        <h3>Sucursal Centro</h3>
+        <p>📍 Av. Juárez #101, Centro, CDMX</p>
+        <p>📞 55-1111-1111</p>
+        <p>🕒 9:00 AM - 8:00 PM</p>
+      </div>
+      <div class="sucursal">
+        <h3>Sucursal Sur</h3>
+        <p>📍 Calz. de Tlalpan #456, CDMX</p>
+        <p>📞 55-2222-2222</p>
+        <p>🕒 10:00 AM - 7:00 PM</p>
+      </div>
+      <div class="sucursal">
+        <h3>Sucursal Norte</h3>
+        <p>📍 Av. Insurgentes Nte. #789, CDMX</p>
+        <p>📞 55-3333-3333</p>
+        <p>🕒 9:30 AM - 8:30 PM</p>
+      </div>
+      <div class="sucursal">
+        <h3>Sucursal Poniente</h3>
+        <p>📍 Av. Reforma #2020, CDMX</p>
+        <p>📞 55-4444-4444</p>
+        <p>🕒 11:00 AM - 6:00 PM</p>
+      </div>
+      <div class="sucursal">
+        <h3>Sucursal Satélite</h3>
+        <p>📍 Periférico Blvd. Manuel Ávila Camacho #1500, Naucalpan</p>
+        <p>📞 55-5555-5555</p>
+        <p>🕒 10:00 AM - 7:00 PM</p>
+      </div>
     </div>
   </section>
 
+  <!-- CONTACTO -->
   <section id="contacto">
     <h2>Contacto</h2>
-    <form id="formulario-contacto">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" required>
+    <p>¿Tienes preguntas o quieres hacer un pedido? ¡Escríbenos!</p>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" required>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <label for="nombre">Nombre:</label><br>
+      <input type="text" id="nombre" name="nombre" required><br>
 
-      <label for="mensaje">Mensaje:</label>
-      <textarea id="mensaje" required></textarea>
+      <label for="email">Correo electrónico:</label><br>
+      <input type="email" id="email" name="email" required><br>
+
+      <label for="mensaje">Mensaje:</label><br>
+      <textarea id="mensaje" name="mensaje" rows="4" required></textarea><br>
 
       <button type="submit">Enviar</button>
     </form>
+
+    <p>Email directo: contacto@dulcesabor.mx</p>
+    <p>Teléfono: 55-1234-5678</p>
+    <p>Dirección: Calle del Sabor #123, CDMX</p>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Pastelería Dulce Sabor. Todos los derechos reservados.</p>
-  </footer>
-
+  <!-- Scripts -->
   <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
+
