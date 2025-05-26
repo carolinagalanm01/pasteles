@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pastelería Dulce Sabor</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>Pastelería Dulce Sabor</h1>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#pasteles">Pasteles</a></li>
+        <li><a href="#eventos">Eventos</a></li>
+        <li><a href="#sucursales">Sucursales</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="inicio">
+    <h2>Bienvenidos a Dulce Sabor</h2>
+    <img src="img/pastel1.jpg" alt="Pastel de Chocolate">
+    <p>Los mejores pasteles artesanales de la ciudad. ¡Hechos con amor y los mejores ingredientes!</p>
+  </section>
+
+  <section id="pasteles">
+    <h2>Nuestros Pasteles</h2>
+    <div class="galeria">
+      <div class="pastel">
+        <img src="img/pastel1.jpg" alt="Pastel de Chocolate">
+        <h3>Pastel de Chocolate</h3>
+        <p>$250 MXN</p>
+        <button class="agregar-carrito" data-id="1" data-nombre="Pastel de Chocolate" data-precio="250">Agregar al Carrito</button>
+      </div>
+      <div class="pastel">
+        <img src="img/pastel2.jpg" alt="Pastel de Fresa">
+        <h3>Pastel de Fresa</h3>
+        <p>$300 MXN</p>
+        <button class="agregar-carrito" data-id="2" data-nombre="Pastel de Fresa" data-precio="300">Agregar al Carrito</button>
+      </div>
+      <div class="pastel">
+        <img src="img/pastel3.jpg" alt="Pastel de Vainilla">
+        <h3>Pastel de Vainilla</h3>
+        <p>$200 MXN</p>
+        <button class="agregar-carrito" data-id="3" data-nombre="Pastel de Vainilla" data-precio="200">Agregar al Carrito</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="eventos">
+    <h2>Eventos Especiales</h2>
+    <ul>
+      <li>🎓 Graduación</li>
+      <li>💍 Boda</li>
+      <li>🎉 Cumpleaños</li>
+    </ul>
+  </section>
+
+  <section id="sucursales">
+    <h2>Nuestras Sucursales</h2>
+    <div class="sucursal">
+      <h3>Sucursal Centro</h3>
+      <img src="img/sucursal1.jpg" alt="Sucursal Centro">
+      <p>Dirección: Calle Principal #123, Ciudad</p>
+      <p>Teléfono: +52 123 456 7890</p>
+    </div>
+    <div class="sucursal">
+      <h3>Sucursal Norte</h3>
+      <img src="img/sucursal2.jpg" alt="Sucursal Norte">
+      <p>Dirección: Calle Norte #45, Ciudad</p>
+      <p>Teléfono: +52 123 456 7891</p>
+    </div>
+    <div class="sucursal">
+      <h3>Sucursal Sur</h3>
+      <img src="img/sucursal3.jpg" alt="Sucursal Sur">
+      <p>Dirección: Plaza Sur, Local 8</p>
+      <p>Teléfono: +52 123 456 7892</p>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <form id="formulario-contacto">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Pastelería Dulce Sabor. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
