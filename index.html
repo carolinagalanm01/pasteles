@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pastelería Las Nubes</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Pastelería Las Nubes</h1>
+    <nav>
+      <button onclick="mostrarSeccion('inicio')">Inicio</button>
+      <button onclick="mostrarSeccion('pasteles-domicilio')">Pasteles a Domicilio</button>
+      <button onclick="mostrarSeccion('productos')">Productos</button>
+      <button onclick="mostrarSeccion('eventos')">Eventos</button>
+      <button onclick="mostrarSeccion('sucursales')">Sucursales</button>
+      <button onclick="mostrarSeccion('carrito')">Carrito</button>
+    </nav>
+  </header>
+
+  <section id="inicio" class="active">
+    <img src="https://via.placeholder.com/800x300?text=Pastel+Principal" alt="Pastel principal" />
+    <p>Bienvenido a <strong>Pastelería Las Nubes</strong>, donde transformamos tus momentos especiales en dulces recuerdos. Descubre nuestros pasteles, gelatinas, y pays hechos con amor.</p>
+  </section>
+
+  <section id="pasteles-domicilio">
+    <h2>Pasteles a Domicilio</h2>
+    <div>
+      <h3>Pastel de Chocolate</h3>
+      <img src="https://via.placeholder.com/200?text=Chocolate" />
+      <p>$250 - Cobertura de chocolate y relleno suave.</p>
+      <button onclick="agregarAlCarrito('Pastel de Chocolate', 250)">Agregar al carrito</button>
+    </div>
+    <div>
+      <h3>Pastel Red Velvet</h3>
+      <img src="https://via.placeholder.com/200?text=Red+Velvet" />
+      <p>$280 - Suave pastel rojo con betún de queso crema.</p>
+      <button onclick="agregarAlCarrito('Pastel Red Velvet', 280)">Agregar al carrito</button>
+    </div>
+    <div>
+      <h3>Pastel de Fresa</h3>
+      <img src="https://via.placeholder.com/200?text=Fresa" />
+      <p>$260 - Relleno de fresas frescas y crema batida.</p>
+      <button onclick="agregarAlCarrito('Pastel de Fresa', 260)">Agregar al carrito</button>
+    </div>
+  </section>
+
+  <section id="productos">
+    <h2>Productos</h2>
+    <button onclick="mostrarSubcategoria('gelatinas')">Gelatinas</button>
+    <button onclick="mostrarSubcategoria('pays')">Pays</button>
+    <button onclick="mostrarSubcategoria('pasteles')">Pasteles</button>
+
+    <div id="gelatinas" class="subcategoria">
+      <h3>Gelatinas</h3>
+      <div>
+        <h4>Gelatina de Mosaico</h4>
+        <img src="https://via.placeholder.com/200?text=Mosaico" />
+        <p>$80 - Colorida, con sabores surtidos.</p>
+        <button onclick="agregarAlCarrito('Gelatina de Mosaico', 80)">Agregar al carrito</button>
+      </div>
+      <div>
+        <h4>Gelatina de Leche</h4>
+        <img src="https://via.placeholder.com/200?text=Leche" />
+        <p>$70 - Cremosa y delicada.</p>
+        <button onclick="agregarAlCarrito('Gelatina de Leche', 70)">Agregar al carrito</button>
+      </div>
+      <button onclick="volverProductos()">Regresar</button>
+    </div>
+
+    <div id="pays" class="subcategoria">
+      <h3>Pays</h3>
+      <div>
+        <h4>Pay de Limón</h4>
+        <img src="https://via.placeholder.com/200?text=Limón" />
+        <p>$90 - Dulce y cítrico, con base de galleta.</p>
+        <button onclick="agregarAlCarrito('Pay de Limón', 90)">Agregar al carrito</button>
+      </div>
+      <div>
+        <h4>Pay de Queso</h4>
+        <img src="https://via.placeholder.com/200?text=Queso" />
+        <p>$95 - Suave y cremoso.</p>
+        <button onclick="agregarAlCarrito('Pay de Queso', 95)">Agregar al carrito</button>
+      </div>
+      <button onclick="volverProductos()">Regresar</button>
+    </div>
+
+    <div id="pasteles" class="subcategoria">
+      <h3>Pasteles</h3>
+      <div>
+        <h4>Pastel Tres Leches</h4>
+        <img src="https://via.placeholder.com/200?text=Tres+Leches" />
+        <p>$220 - Clásico con mezcla de tres leches.</p>
+        <button onclick="agregarAlCarrito('Pastel Tres Leches', 220)">Agregar al carrito</button>
+      </div>
+      <div>
+        <h4>Pastel de Zanahoria</h4>
+        <img src="https://via.placeholder.com/200?text=Zanahoria" />
+        <p>$230 - Con nueces y betún de queso crema.</p>
+        <button onclick="agregarAlCarrito('Pastel de Zanahoria', 230)">Agregar al carrito</button>
+      </div>
+      <button onclick="volverProductos()">Regresar</button>
+    </div>
+  </section>
+
+  <section id="eventos">
+    <h2>Eventos</h2>
+    <div>
+      <h3>Graduación</h3>
+      <img src="https://via.placeholder.com/200?text=Graduación" />
+    </div>
+    <div>
+      <h3>Cumpleaños</h3>
+      <img src="https://via.placeholder.com/200?text=Cumpleaños" />
+    </div>
+    <div>
+      <h3>Boda</h3>
+      <img src="https://via.placeholder.com/200?text=Boda" />
+    </div>
+  </section>
+
+  <section id="sucursales">
+    <h2>Sucursales</h2>
+    <ul>
+      <li>Sucursal Centro - Calle Dulce 123</li>
+      <li>Sucursal Norte - Avenida Pastel 456</li>
+    </ul>
+  </section>
+
+  <section id="carrito">
+    <h2>Carrito de Compras</h2>
+    <ul id="carrito-contenido"></ul>
+    <p id="total-carrito">Total: $0</p>
+    <button onclick="generarTicketPDF()">Generar Ticket PDF</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
