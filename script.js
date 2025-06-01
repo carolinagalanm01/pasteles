@@ -1,61 +1,82 @@
+// Inicializar EmailJS
+(function () {
+  emailjs.init("8rd5eV0Wl3J-_roYR");
+})();
+
 function mostrarSeccion(id) {
-  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  document.querySelectorAll(".subcategoria").forEach(sub => sub.style.display = "none");
+  const secciones = document.querySelectorAll("main > section");
+  secciones.forEach(sec => sec.style.display = "none");
+  document.getElementById(id).style.display = "block";
 }
 
-function mostrarSubcategoria(tipo) {
-  document.querySelectorAll(".subcategoria").forEach(sub => sub.style.display = "none");
-  document.getElementById(tipo).style.display = "block";
+const productos = {
+  pasteles: [
+    { nombre: "Pastel de Chocolate", precio: 250 },
+    { nombre: "Pastel de Fresa", precio: 230 }
+  ],
+  gelatinas: [
+    { nombre: "Gelatina Tricolor", precio: 70 },
+    { nombre: "Gelatina de Mosaico", precio: 80 }
+  ],
+  pays: [
+    { nombre: "Pay de Limón", precio: 90 },
+    { nombre: "Pay de Queso", precio: 100 }
+  ]
+};
+
+function mostrarCategoria(categoria) {
+  const cont = document.getElementById("categoria-productos");
+  cont.innerHTML = "";
+  productos[categoria].forEach((p, i) => {
+    cont.innerHTML += `
+      <div>
+        <h3>${p.nombre}</h3>
+        <p>Precio: $${p.precio}</p>
+        <button onclick="agregarAlCarrito('${categoria}', ${i})">Agregar al carrito</button>
+      </div>
+    `;
+  });
 }
 
-function volverProductos() {
-  document.querySelectorAll(".subcategoria").forEach(sub => sub.style.display = "none");
-}
+const carrito = [];
 
-let carrito = [];
-
-function agregarAlCarrito(nombre, precio) {
-  carrito.push({ nombre, precio });
-  actualizarCarrito();
-}
-
-function eliminarDelCarrito(index) {
-  carrito.splice(index, 1);
+function agregarAlCarrito(cat, idx) {
+  carrito.push(productos[cat][idx]);
   actualizarCarrito();
 }
 
 function actualizarCarrito() {
-  const lista = document.getElementById("carrito-contenido");
+  const lista = document.getElementById("lista-carrito");
+  const total = document.getElementById("total-carrito");
   lista.innerHTML = "";
-  let total = 0;
+  let suma = 0;
   carrito.forEach((item, i) => {
-    total += item.precio;
-    lista.innerHTML += `<li>${item.nombre} - $${item.precio} <button onclick="eliminarDelCarrito(${i})">Eliminar</button></li>`;
+    suma += item.precio;
+    lista.innerHTML += `<li>${item.nombre} - $${item.precio}
+      <button onclick="borrarProducto(${i})">Eliminar</button>
+    </li>`;
   });
-  document.getElementById("total-carrito").textContent = `Total: $${total}`;
+  total.textContent = suma;
 }
 
-async function generarTicketPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  doc.setFontSize(16);
-  doc.text("Ticket de Compra - Pastelería Las Nubes", 20, 20);
-  let y = 30;
-  let total = 0;
-  carrito.forEach((item, i) => {
-    const linea = `${i + 1}. ${item.nombre} - $${item.precio}`;
-    doc.text(linea, 20, y);
-    y += 10;
-    total += item.precio;
-  });
-  doc.text(`Total: $${total}`, 20, y + 10);
-  doc.save("ticket_pasteleria.pdf");
+function borrarProducto(i) {
+  carrito.splice(i, 1);
+  actualizarCarrito();
 }
-(function () {
-  emailjs.init("service_t8sak4q"); // Reemplaza con tu PUBLIC_KEY
-})();
 
+// Ticket en PDF
+function descargarTicket() {
+  const doc = new window.jspdf.jsPDF();
+  doc.text("Ticket de compra - Pastelería Las Nubes", 10, 10);
+  carrito.forEach((item, i) => {
+    doc.text(`${i + 1}. ${item.nombre} - $${item.precio}`, 10, 20 + i * 10);
+  });
+  const total = carrito.reduce((acc, val) => acc + val.precio, 0);
+  doc.text(`Total: $${total}`, 10, 30 + carrito.length * 10);
+  doc.save("ticket.pdf");
+}
+
+// Enviar contacto
 document.getElementById("form-contacto").addEventListener("submit", function (e) {
   e.preventDefault();
   const templateParams = {
@@ -64,12 +85,11 @@ document.getElementById("form-contacto").addEventListener("submit", function (e)
     message: document.getElementById("mensaje").value,
   };
 
-  emailjs.send("galamarca2019@gmail.com", "service_t8sak4q", templateParams)
-    .then(function () {
-      document.getElementById("mensaje-enviado").textContent = "¡Mensaje enviado exitosamente!";
+  emailjs.send("service_t8sak4q", "template_aqvt12p", templateParams)
+    .then(() => {
+      document.getElementById("mensaje-enviado").textContent = "¡Mensaje enviado correctamente!";
       document.getElementById("form-contacto").reset();
-    }, function (error) {
+    }, (error) => {
       alert("Error al enviar el mensaje: " + JSON.stringify(error));
     });
 });
-
