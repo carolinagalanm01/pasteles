@@ -52,3 +52,24 @@ async function generarTicketPDF() {
   doc.text(`Total: $${total}`, 20, y + 10);
   doc.save("ticket_pasteleria.pdf");
 }
+(function () {
+  emailjs.init("service_t8sak4q"); // Reemplaza con tu PUBLIC_KEY
+})();
+
+document.getElementById("form-contacto").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const templateParams = {
+    from_name: document.getElementById("nombre").value,
+    reply_to: document.getElementById("email").value,
+    message: document.getElementById("mensaje").value,
+  };
+
+  emailjs.send("galamarca2019@gmail.com", "service_t8sak4q", templateParams)
+    .then(function () {
+      document.getElementById("mensaje-enviado").textContent = "¡Mensaje enviado exitosamente!";
+      document.getElementById("form-contacto").reset();
+    }, function (error) {
+      alert("Error al enviar el mensaje: " + JSON.stringify(error));
+    });
+});
+
