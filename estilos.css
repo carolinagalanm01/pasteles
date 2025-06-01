@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #f3a5a5;
+  padding: 1em;
+  text-align: center;
+}
+
+nav button {
+  margin: 0.5em;
+  padding: 0.5em 1em;
+}
+
+section {
+  display: none;
+  padding: 1em;
+}
+
+section.active {
+  display: block;
+}
+
+.subcategoria {
+  display: none;
+}
+
+img {
+  max-width: 200px;
+  display: block;
+  margin-bottom: 1em;
+}
+
+button {
+  margin-top: 0.5em;
+  padding: 0.5em 1em;
+  background-color: #f78181;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d95d5d;
+}
+
