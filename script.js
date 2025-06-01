@@ -1,95 +1,54 @@
-// Inicializar EmailJS
-(function () {
-  emailjs.init("8rd5eV0Wl3J-_roYR");
-})();
-
 function mostrarSeccion(id) {
-  const secciones = document.querySelectorAll("main > section");
-  secciones.forEach(sec => sec.style.display = "none");
-  document.getElementById(id).style.display = "block";
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".subcategoria").forEach(sub => sub.style.display = "none");
 }
 
-const productos = {
-  pasteles: [
-    { nombre: "Pastel de Chocolate", precio: 250 },
-    { nombre: "Pastel de Fresa", precio: 230 }
-  ],
-  gelatinas: [
-    { nombre: "Gelatina Tricolor", precio: 70 },
-    { nombre: "Gelatina de Mosaico", precio: 80 }
-  ],
-  pays: [
-    { nombre: "Pay de Limón", precio: 90 },
-    { nombre: "Pay de Queso", precio: 100 }
-  ]
-};
-
-function mostrarCategoria(categoria) {
-  const cont = document.getElementById("categoria-productos");
-  cont.innerHTML = "";
-  productos[categoria].forEach((p, i) => {
-    cont.innerHTML += `
-      <div>
-        <h3>${p.nombre}</h3>
-        <p>Precio: $${p.precio}</p>
-        <button onclick="agregarAlCarrito('${categoria}', ${i})">Agregar al carrito</button>
-      </div>
-    `;
-  });
+function mostrarSubcategoria(tipo) {
+  document.querySelectorAll(".subcategoria").forEach(sub => sub.style.display = "none");
+  document.getElementById(tipo).style.display = "block";
 }
 
-const carrito = [];
+function volverProductos() {
+  document.querySelectorAll(".subcategoria").forEach(sub => sub.style.display = "none");
+}
 
-function agregarAlCarrito(cat, idx) {
-  carrito.push(productos[cat][idx]);
+let carrito = [];
+
+function agregarAlCarrito(nombre, precio) {
+  carrito.push({ nombre, precio });
+  actualizarCarrito();
+}
+
+function eliminarDelCarrito(index) {
+  carrito.splice(index, 1);
   actualizarCarrito();
 }
 
 function actualizarCarrito() {
-  const lista = document.getElementById("lista-carrito");
-  const total = document.getElementById("total-carrito");
+  const lista = document.getElementById("carrito-contenido");
   lista.innerHTML = "";
-  let suma = 0;
+  let total = 0;
   carrito.forEach((item, i) => {
-    suma += item.precio;
-    lista.innerHTML += `<li>${item.nombre} - $${item.precio}
-      <button onclick="borrarProducto(${i})">Eliminar</button>
-    </li>`;
+    total += item.precio;
+    lista.innerHTML += `<li>${item.nombre} - $${item.precio} <button onclick="eliminarDelCarrito(${i})">Eliminar</button></li>`;
   });
-  total.textContent = suma;
+  document.getElementById("total-carrito").textContent = `Total: $${total}`;
 }
 
-function borrarProducto(i) {
-  carrito.splice(i, 1);
-  actualizarCarrito();
-}
-
-// Ticket en PDF
-function descargarTicket() {
-  const doc = new window.jspdf.jsPDF();
-  doc.text("Ticket de compra - Pastelería Las Nubes", 10, 10);
+async function generarTicketPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.setFontSize(16);
+  doc.text("Ticket de Compra - Pastelería Las Nubes", 20, 20);
+  let y = 30;
+  let total = 0;
   carrito.forEach((item, i) => {
-    doc.text(`${i + 1}. ${item.nombre} - $${item.precio}`, 10, 20 + i * 10);
+    const linea = `${i + 1}. ${item.nombre} - $${item.precio}`;
+    doc.text(linea, 20, y);
+    y += 10;
+    total += item.precio;
   });
-  const total = carrito.reduce((acc, val) => acc + val.precio, 0);
-  doc.text(`Total: $${total}`, 10, 30 + carrito.length * 10);
-  doc.save("ticket.pdf");
+  doc.text(`Total: $${total}`, 20, y + 10);
+  doc.save("ticket_pasteleria.pdf");
 }
-
-// Enviar contacto
-document.getElementById("form-contacto").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const templateParams = {
-    from_name: document.getElementById("nombre").value,
-    reply_to: document.getElementById("email").value,
-    message: document.getElementById("mensaje").value,
-  };
-
-  emailjs.send("service_t8sak4q", "template_aqvt12p", templateParams)
-    .then(() => {
-      document.getElementById("mensaje-enviado").textContent = "¡Mensaje enviado correctamente!";
-      document.getElementById("form-contacto").reset();
-    }, (error) => {
-      alert("Error al enviar el mensaje: " + JSON.stringify(error));
-    });
-});
