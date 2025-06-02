@@ -4,7 +4,7 @@ const productos = {
       nombre: "Pastel de Chocolate",
       precio: 250,
       descripcion: "Delicioso pastel de chocolate con cobertura suave y esponjoso bizcocho.",
-      imagen: "https://images.unsplash.com/photo-1599785209707-28d1d4fef877"
+      imagen: "chococo.jpg"
     },
     {
       nombre: "Pastel Tres Leches",
