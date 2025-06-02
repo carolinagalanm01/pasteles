@@ -10,13 +10,13 @@ const productos = {
       nombre: "Pastel Tres Leches",
       precio: 300,
       descripcion: "Clásico pastel esponjoso empapado en una mezcla de tres leches y cubierto con crema.",
-      imagen: "https://images.unsplash.com/photo-1589308078055-375ffbdc3834"
+      imagen: "tres.jpg"
     },
     {
       nombre: "Pastel de Zanahoria",
       precio: 280,
       descripcion: "Pastel húmedo con zanahoria rallada, especias y betún de queso crema.",
-      imagen: "https://images.unsplash.com/photo-1601056553301-019d3b9d4f4b"
+      imagen: "zana.jpg"
     }
   ],
   gelatinas: [
@@ -24,13 +24,13 @@ const productos = {
       nombre: "Gelatina de Mosaico",
       precio: 80,
       descripcion: "Colorida gelatina con cubos de sabores surtidos en leche condensada.",
-      imagen: "https://images.unsplash.com/photo-1613141412046-7a4dbe962846"
+      imagen: "mosaico.jpg"
     },
     {
       nombre: "Gelatina de Fresa",
       precio: 70,
       descripcion: "Refrescante gelatina de fresa natural con una textura firme y dulce.",
-      imagen: "https://images.unsplash.com/photo-1615484477689-d64ef01c8e30"
+      imagen: "fresa.jpg"
     }
   ],
   pays: [
@@ -38,7 +38,7 @@ const productos = {
       nombre: "Pay de Limón",
       precio: 90,
       descripcion: "Pay suave de limón con base de galleta y cobertura cremosa.",
-      imagen: "https://images.unsplash.com/photo-1562440499-64e4b68f417e"
+      imagen: "limon.jpg"
     },
     {
       nombre: "Pay de Queso",
