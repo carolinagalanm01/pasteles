@@ -1,857 +1,508 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pastelería Las Nubes</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pastelería Las Nubes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-```
     body {
-        font-family: 'Arial', sans-serif;
-        background: linear-gradient(135deg, #ffeef5, #f0c5d8);
-        min-height: 100vh;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+      min-height: 100vh;
     }
 
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    .header {
-        text-align: center;
-        background: linear-gradient(135deg, #ff69b4, #ff1493);
-        color: white;
-        padding: 40px 20px;
-        border-radius: 20px;
-        margin-bottom: 30px;
-        box-shadow: 0 8px 32px rgba(255, 105, 180, 0.3);
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
 
-    .header h1 {
-        font-size: 3em;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    header p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
     }
 
-    .hero-image {
-        width: 100%;
-        max-width: 600px;
-        height: 300px;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300"><rect fill="%23ffe4e1" width="600" height="300"/><circle fill="%23ff69b4" cx="150" cy="150" r="80" opacity="0.3"/><circle fill="%23ff1493" cx="450" cy="150" r="60" opacity="0.3"/><path fill="%238b4513" d="M200 200 Q300 150 400 200 L400 250 Q300 220 200 250 Z"/><text x="300" y="100" text-anchor="middle" fill="%23ff1493" font-size="24" font-weight="bold">🎂 Deliciosos Pasteles 🎂</text></svg>') center/cover;
-        border-radius: 15px;
-        margin: 20px auto;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .nav-buttons {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin: 30px 0;
+    nav button {
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
     }
 
-    .nav-btn {
-        background: linear-gradient(135deg, #ff91a4, #ff69b4);
-        color: white;
-        border: none;
-        padding: 15px 25px;
-        border-radius: 15px;
-        font-size: 1.1em;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    nav button:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
-    .nav-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .section {
-        display: none;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 20px;
-        padding: 30px;
-        margin: 20px 0;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    section {
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
     }
 
-    .section.active {
-        display: block;
+    #inicio img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      display: block;
+      margin: 0 auto;
     }
 
-    .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
-        margin: 20px 0;
+    h2 {
+      color: #667eea;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
     }
 
-    .product-card {
-        background: white;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
+    .categoria-botones {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
     }
 
-    .product-card:hover {
-        transform: translateY(-5px);
+    .categoria-botones button {
+      background: linear-gradient(135deg, #ff9a9e, #fecfef);
+      border: none;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
-    .product-image {
-        width: 100%;
-        height: 200px;
-        background: #f0f0f0;
-        border-radius: 10px;
-        margin-bottom: 15px;
-        display: flex;
+    .categoria-botones button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .productos-lista {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .contacto-container {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .contacto-botones {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contacto-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .contacto-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .instagram {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    }
+
+    .facebook {
+      background: linear-gradient(135deg, #3b5998, #192f5d);
+    }
+
+    .whatsapp {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+    }
+
+    .evento {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .evento h3 {
+      color: #667eea;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .evento img {
+      width: 100%;
+      max-width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: rgba(255,255,255,0.7);
+      margin: 0.5rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .lista-carrito {
+      margin-bottom: 1rem;
+    }
+
+    .total {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #667eea;
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    select, button {
+      padding: 0.8rem;
+      margin: 0.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    select {
+      background: white;
+      border: 2px solid #667eea;
+    }
+
+    button:not(nav button):not(.categoria-botones button):not(.contacto-btn) {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:not(nav button):not(.categoria-botones button):not(.contacto-btn):hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      nav {
+        gap: 0.5rem;
+      }
+      
+      nav button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .contacto-botones {
+        flex-direction: column;
         align-items: center;
+      }
+      
+      .contacto-btn {
+        width: 80%;
         justify-content: center;
-        font-size: 3em;
+      }
     }
-
-    .product-info h3 {
-        color: #ff1493;
-        margin-bottom: 10px;
-        font-size: 1.3em;
-    }
-
-    .product-price {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: #ff69b4;
-        margin: 10px 0;
-    }
-
-    .add-to-cart {
-        background: linear-gradient(135deg, #32cd32, #228b22);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        width: 100%;
-        transition: all 0.3s ease;
-    }
-
-    .add-to-cart:hover {
-        transform: scale(1.05);
-    }
-
-    .cart-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px;
-        background: #f9f9f9;
-        margin: 10px 0;
-        border-radius: 10px;
-    }
-
-    .cart-total {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: #ff1493;
-        text-align: center;
-        margin: 20px 0;
-    }
-
-    .payment-section {
-        background: #f0f8ff;
-        padding: 20px;
-        border-radius: 15px;
-        margin: 20px 0;
-    }
-
-    .payment-btn {
-        background: linear-gradient(135deg, #4169e1, #1e90ff);
-        color: white;
-        border: none;
-        padding: 15px 30px;
-        border-radius: 10px;
-        font-size: 1.1em;
-        cursor: pointer;
-        margin: 10px;
-        transition: all 0.3s ease;
-    }
-
-    .payment-btn:hover {
-        transform: scale(1.05);
-    }
-
-    .events-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
-
-    .event-card {
-        background: white;
-        border-radius: 15px;
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-
-    .event-emoji {
-        font-size: 4em;
-        margin-bottom: 15px;
-    }
-
-    .sucursales-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 15px;
-    }
-
-    .sucursal-card {
-        background: white;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .remove-btn {
-        background: #ff4444;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .category-btn {
-        background: linear-gradient(135deg, #9370db, #8a2be2);
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 10px;
-        margin: 10px;
-        font-size: 1em;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .category-btn:hover {
-        transform: scale(1.05);
-    }
-
-    .back-btn {
-        background: #666;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        margin: 10px 0;
-        cursor: pointer;
-    }
-
-    .contact-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin: 20px 0;
-    }
-
-    .contact-card {
-        background: white;
-        border-radius: 20px;
-        padding: 30px;
-        text-align: center;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .contact-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .contact-icon {
-        font-size: 4em;
-        margin-bottom: 20px;
-    }
-
-    .social-btn {
-        background: linear-gradient(135deg, #e1306c, #fd1d1d);
-        color: white;
-        border: none;
-        padding: 15px 30px;
-        border-radius: 25px;
-        font-size: 1.1em;
-        font-weight: bold;
-        cursor: pointer;
-        margin: 10px;
-        text-decoration: none;
-        display: inline-block;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(225, 48, 108, 0.3);
-    }
-
-    .social-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(225, 48, 108, 0.4);
-    }
-
-    .social-btn.facebook {
-        background: linear-gradient(135deg, #1877f2, #42a5f5);
-    }
-
-    .social-btn.whatsapp {
-        background: linear-gradient(135deg, #25d366, #128c7e);
-    }
-
-    .contact-form {
-        background: #f8f9fa;
-        padding: 25px;
-        border-radius: 15px;
-        margin: 20px 0;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid #ddd;
-        border-radius: 8px;
-        font-size: 1em;
-        transition: border-color 0.3s ease;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-        outline: none;
-        border-color: #ff69b4;
-    }
-
-    .whatsapp-btn {
-        background: linear-gradient(135deg, #25d366, #128c7e);
-        color: white;
-        border: none;
-        padding: 15px 30px;
-        border-radius: 25px;
-        font-size: 1.2em;
-        font-weight: bold;
-        cursor: pointer;
-        width: 100%;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-    }
-
-    .whatsapp-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    }
-</style>
-```
-
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Pastelería Las Nubes</h1>
-            <div class="hero-image"></div>
-            <h2>Deliciosos momentos para cada ocasión: pasteles, gelatinas, pays y más.</h2>
-        </div>
+  <header>
+    <h1>Pastelería Las Nubes</h1>
+    <p>Deliciosos momentos para cada ocasión: pasteles, gelatinas, pays y más.</p>
+    <nav>
+      <button onclick="mostrarSeccion('inicio')">Inicio</button>
+      <button onclick="mostrarSeccion('productos')">Productos</button>
+      <button onclick="mostrarSeccion('contacto')">Contáctanos</button>
+      <button onclick="mostrarSeccion('eventos')">Eventos</button>
+      <button onclick="mostrarSeccion('sucursales')">Sucursales</button>
+      <button onclick="mostrarSeccion('carrito')">Carrito</button>
+    </nav>
+  </header>
 
-```
-    <div id="main-menu">
-        <div class="nav-buttons">
-            <button class="nav-btn" onclick="showSection('productos')">Productos</button>
-            <button class="nav-btn" onclick="showSection('eventos')">Eventos</button>
-            <button class="nav-btn" onclick="showSection('sucursales')">Sucursales</button>
-            <button class="nav-btn" onclick="showSection('contacto')">Contáctanos</button>
-            <button class="nav-btn" onclick="showSection('carrito')">Carrito (<span id="cart-count">0</span>)</button>
-        </div>
-    </div>
+  <main>
+    <section id="inicio">
+      <img src="chicola.jpg" alt="Pastelería Las Nubes"/>
+    </section>
 
-    <!-- Sección Productos -->
-    <div id="productos" class="section">
-        <h2>Nuestros Productos</h2>
-        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
-        
-        <div class="nav-buttons">
-            <button class="category-btn" onclick="showCategory('pasteles')">Pasteles</button>
-            <button class="category-btn" onclick="showCategory('gelatinas')">Gelatinas</button>
-            <button class="category-btn" onclick="showCategory('pays')">Pays</button>
-            <button class="category-btn" onclick="showCategory('galletas')">Galletas</button>
-        </div>
+    <section id="productos" style="display:none;">
+      <h2>Nuestros Productos</h2>
+      <div class="categoria-botones">
+        <button onclick="mostrarCategoria('pasteles')">Pasteles</button>
+        <button onclick="mostrarCategoria('gelatinas')">Gelatinas</button>
+        <button onclick="mostrarCategoria('pays')">Pays</button>
+      </div>
+      <div id="categoria-productos" class="productos-lista"></div>
+      <button onclick="mostrarSeccion('productos')">Regresar</button>
+    </section>
 
-        <!-- Pasteles -->
-        <div id="pasteles" class="products-grid" style="display: none;">
-            <div class="product-card">
-                <div class="product-image">🍫</div>
-                <div class="product-info">
-                    <h3>Pastel de Chocolate</h3>
-                    <p>Delicioso pastel de chocolate con capas esponjosas y crema de chocolate belga. Perfecto para celebraciones especiales.</p>
-                    <div class="product-price">$450</div>
-                    <button class="add-to-cart" onclick="addToCart('Pastel de Chocolate', 450)">Agregar al Carrito</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">🥛</div>
-                <div class="product-info">
-                    <h3>Pastel Tres Leches</h3>
-                    <p>Tradicional pastel tres leches con bizcocho suave empapado en tres tipos de leche y cubierto con merengue.</p>
-                    <div class="product-price">$380</div>
-                    <button class="add-to-cart" onclick="addToCart('Pastel Tres Leches', 380)">Agregar al Carrito</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">🥕</div>
-                <div class="product-info">
-                    <h3>Pastel de Zanahoria</h3>
-                    <p>Pastel húmedo de zanahoria con especias naturales, nueces y cobertura de queso crema con canela.</p>
-                    <div class="product-price">$420</div>
-                    <button class="add-to-cart" onclick="addToCart('Pastel de Zanahoria', 420)">Agregar al Carrito</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gelatinas -->
-        <div id="gelatinas" class="products-grid" style="display: none;">
-            <div class="product-card">
-                <div class="product-image">🌈</div>
-                <div class="product-info">
-                    <h3>Gelatina de Mosaico</h3>
-                    <p>Colorida gelatina de mosaico con cubitos de diferentes sabores en una base de leche condensada.</p>
-                    <div class="product-price">$180</div>
-                    <button class="add-to-cart" onclick="addToCart('Gelatina de Mosaico', 180)">Agregar al Carrito</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">🍓</div>
-                <div class="product-info">
-                    <h3>Gelatina de Fresa</h3>
-                    <p>Refrescante gelatina de fresa natural con trozos de fruta fresca y un toque de crema.</p>
-                    <div class="product-price">$150</div>
-                    <button class="add-to-cart" onclick="addToCart('Gelatina de Fresa', 150)">Agregar al Carrito</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pays -->
-        <div id="pays" class="products-grid" style="display: none;">
-            <div class="product-card">
-                <div class="product-image">🍋</div>
-                <div class="product-info">
-                    <h3>Pay de Limón</h3>
-                    <p>Exquisito pay de limón con base crujiente de galleta y relleno cremoso de limón natural con merengue.</p>
-                    <div class="product-price">$320</div>
-                    <button class="add-to-cart" onclick="addToCart('Pay de Limón', 320)">Agregar al Carrito</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">🧀</div>
-                <div class="product-info">
-                    <h3>Pay de Queso</h3>
-                    <p>Cremoso pay de queso estilo Nueva York con base de galleta graham y topping de frutos rojos.</p>
-                    <div class="product-price">$350</div>
-                    <button class="add-to-cart" onclick="addToCart('Pay de Queso', 350)">Agregar al Carrito</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Galletas -->
-        <div id="galletas" class="products-grid" style="display: none;">
-            <div class="product-card">
-                <div class="product-image">🍪</div>
-                <div class="product-info">
-                    <h3>Galletas de Chispas de Chocolate</h3>
-                    <p>Clásicas galletas caseras con chispas de chocolate, crujientes por fuera y suaves por dentro.</p>
-                    <div class="product-price">$80</div>
-                    <button class="add-to-cart" onclick="addToCart('Galletas Chispas Chocolate', 80)">Agregar al Carrito</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">🥜</div>
-                <div class="product-info">
-                    <h3>Galletas de Avena</h3>
-                    <p>Nutritivas galletas de avena con pasas y canela, perfectas para acompañar tu café o té.</p>
-                    <div class="product-price">$70</div>
-                    <button class="add-to-cart" onclick="addToCart('Galletas de Avena', 70)">Agregar al Carrito</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">🌰</div>
-                <div class="product-info">
-                    <h3>Galletas de Mantequilla</h3>
-                    <p>Delicadas galletas de mantequilla con un toque de vainilla, perfectas para cualquier ocasión.</p>
-                    <div class="product-price">$75</div>
-                    <button class="add-to-cart" onclick="addToCart('Galletas de Mantequilla', 75)">Agregar al Carrito</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sección Eventos -->
-    <div id="eventos" class="section">
-        <h2>Nuestros Eventos</h2>
-        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
-        
-        <div class="events-grid">
-            <div class="event-card">
-                <div class="event-emoji">🎓</div>
-                <h3>Graduaciones</h3>
-                <p>Hemos participado en más de 150 graduaciones, creando pasteles únicos para celebrar este momento tan especial en la vida de nuestros clientes.</p>
-            </div>
-            <div class="event-card">
-                <div class="event-emoji">🎉</div>
-                <h3>Fiestas</h3>
-                <p>Desde cumpleaños infantiles hasta celebraciones de adultos, hemos endulzado más de 500 fiestas con nuestros deliciosos postres.</p>
-            </div>
-            <div class="event-card">
-                <div class="event-emoji">💒</div>
-                <h3>Bodas</h3>
-                <p>Hemos tenido el honor de crear pasteles de boda únicos para más de 80 parejas, haciendo de su día especial un momento inolvidable.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sección Sucursales -->
-    <div id="sucursales" class="section">
-        <h2>Nuestras Sucursales</h2>
-        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
-        
-        <div class="sucursales-grid">
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Centro</h4>
-                <p>Av. Juárez #123, Centro Histórico<br>📞 55-1234-5678</p>
-            </div>
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Norte</h4>
-                <p>Blvd. Norte #456, Col. Lindavista<br>📞 55-2345-6789</p>
-            </div>
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Sur</h4>
-                <p>Av. División del Norte #789, Col. Narvarte<br>📞 55-3456-7890</p>
-            </div>
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Oriente</h4>
-                <p>Calz. Ignacio Zaragoza #321, Col. Jardín Balbuena<br>📞 55-4567-8901</p>
-            </div>
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Poniente</h4>
-                <p>Av. Observatorio #654, Col. Tacubaya<br>📞 55-5678-9012</p>
-            </div>
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Polanco</h4>
-                <p>Av. Presidente Masaryk #987, Polanco<br>📞 55-6789-0123</p>
-            </div>
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Roma</h4>
-                <p>Av. Álvaro Obregón #147, Col. Roma Norte<br>📞 55-7890-1234</p>
-            </div>
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Condesa</h4>
-                <p>Av. Amsterdam #258, Col. Condesa<br>📞 55-8901-2345</p>
-            </div>
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Coyoacán</h4>
-                <p>Av. Universidad #369, Col. Coyoacán<br>📞 55-9012-3456</p>
-            </div>
-            <div class="sucursal-card">
-                <h4>🏪 Sucursal Xochimilco</h4>
-                <p>Av. Nuevo León #741, Xochimilco<br>📞 55-0123-4567</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sección Contacto -->
-    <div id="contacto" class="section">
+    <section id="contacto" style="display:none;">
+      <div class="contacto-container">
         <h2>Contáctanos</h2>
-        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
+        <p>¡Estamos aquí para hacer realidad tus dulces sueños!</p>
+        <p>Contáctanos por cualquiera de nuestros medios:</p>
         
-        <div class="contact-container">
-            <div class="contact-card">
-                <div class="contact-icon">📱</div>
-                <h3>Síguenos en Redes Sociales</h3>
-                <p>Mantente al día con nuestras últimas creaciones y promociones</p>
-                <a href="https://instagram.com/carolinagalanm" target="_blank" class="social-btn">
-                    📷 Instagram @carolinagalanm
-                </a>
-                <a href="https://facebook.com/Carolina-Galán" target="_blank" class="social-btn facebook">
-                    👥 Facebook Carolina Galán
-                </a>
-            </div>
-            
-            <div class="contact-card">
-                <div class="contact-icon">💬</div>
-                <h3>Envíanos un Mensaje</h3>
-                <p>¿Tienes alguna pregunta o pedido especial? ¡Escríbenos!</p>
-                
-                <div class="contact-form">
-                    <div class="form-group">
-                        <label for="nombre">Tu Nombre:</label>
-                        <input type="text" id="nombre" placeholder="Escribe tu nombre">
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono">Tu Teléfono:</label>
-                        <input type="tel" id="telefono" placeholder="10 dígitos">
-                    </div>
-                    <div class="form-group">
-                        <label for="mensaje">Tu Mensaje:</label>
-                        <textarea id="mensaje" rows="4" placeholder="Cuéntanos qué necesitas..."></textarea>
-                    </div>
-                    <button class="whatsapp-btn" onclick="sendWhatsAppMessage()">
-                        📲 Enviar por WhatsApp
-                    </button>
-                </div>
-            </div>
+        <div class="contacto-botones">
+          <a href="https://instagram.com/carolinagalanm" target="_blank" class="contacto-btn instagram">
+            📷 Instagram
+            <br><small>@carolinagalanm</small>
+          </a>
+          
+          <a href="https://facebook.com/search/top?q=Carolina%20Galan" target="_blank" class="contacto-btn facebook">
+            📘 Facebook
+            <br><small>Carolina Galan</small>
+          </a>
+          
+          <a href="https://wa.me/527791253908?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20sus%20productos%20de%20pastelería" target="_blank" class="contacto-btn whatsapp">
+            📱 WhatsApp
+            <br><small>779-125-3908</small>
+          </a>
         </div>
         
-        <div class="contact-card" style="margin-top: 30px;">
-            <div class="contact-icon">🏪</div>
-            <h3>Información de Contacto</h3>
-            <p><strong>📧 Email:</strong> info@pastelerialasnubes.com</p>
-            <p><strong>📞 Teléfono Principal:</strong> 55-1234-5678</p>
-            <p><strong>🕒 Horarios:</strong> Lunes a Domingo 8:00 AM - 8:00 PM</p>
-            <p><strong>🚚 Entregas a Domicilio</strong> disponibles en toda la ciudad</p>
-        </div>
-    </div>
+        <p style="margin-top: 2rem; color: #667eea; font-weight: bold;">
+          ¡Haz clic en cualquier botón para contactarnos directamente!
+        </p>
+      </div>
+    </section>
 
-    <!-- Sección Carrito -->
-    <div id="carrito" class="section">
-        <h2>Tu Carrito de Compras</h2>
-        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
-        
-        <div id="cart-items"></div>
-        <div class="cart-total" id="cart-total">Total: $0</div>
-        
-        <div class="payment-section">
-            <h3>Método de Pago</h3>
-            <button class="payment-btn" onclick="processPayment('efectivo')">💰 Pagar en Efectivo</button>
-            <button class="payment-btn" onclick="processPayment('tarjeta')">💳 Pagar con Tarjeta</button>
-        </div>
-    </div>
-</div>
+    <section id="eventos" style="display:none;">
+      <h2>Eventos Especiales</h2>
+      <div class="evento">
+        <h3>Graduación</h3>
+        <img src="https://images.unsplash.com/photo-1559628233-3e3e718f13fc" alt="Graduación" />
+      </div>
+      <div class="evento">
+        <h3>Cumpleaños</h3>
+        <img src="https://images.unsplash.com/photo-1608534508750-197ef62f3e79" alt="Cumpleaños" />
+      </div>
+      <div class="evento">
+        <h3>Boda</h3>
+        <img src="https://images.unsplash.com/photo-1607082349566-18739d6cfb3a" alt="Boda" />
+      </div>
+    </section>
 
-<script>
-    let cart = [];
-    let cartTotal = 0;
+    <section id="sucursales" style="display:none;">
+      <h2>Nuestras Sucursales</h2>
+      <ul>
+        <li>Sucursal Centro - Calle 123</li>
+        <li>Sucursal Norte - Av. Reforma 456</li>
+        <li>Sucursal Sur - Calle 789</li>
+      </ul>
+    </section>
 
-    function showSection(sectionId) {
-        // Ocultar todas las secciones
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => section.classList.remove('active'));
-        
-        // Ocultar menú principal
-        document.getElementById('main-menu').style.display = 'none';
-        
-        // Mostrar sección seleccionada
-        document.getElementById(sectionId).classList.add('active');
-        
-        if (sectionId === 'carrito') {
-            updateCartDisplay();
-        }
+    <section id="carrito" style="display:none;">
+      <h2>Carrito de Compras</h2>
+      <ul id="lista-carrito" class="lista-carrito"></ul>
+      <p class="total">Total: $<span id="total-carrito">0</span></p>
+      <label for="metodoPago">Selecciona tu método de pago:</label>
+      <select id="metodoPago">
+        <option value="Efectivo">Efectivo</option>
+        <option value="Tarjeta">Tarjeta</option>
+      </select>
+      <button onclick="descargarTicket()">Descargar Ticket en PDF</button>
+    </section>
+  </main>
+
+  <script>
+    // Variables globales
+    let carrito = [];
+    let total = 0;
+
+    // Datos de productos
+    const productos = {
+      pasteles: [
+        { id: 1, nombre: "Pastel de Chocolate", precio: 350, imagen: "https://images.unsplash.com/photo-1578985545062-69928b1d9587" },
+        { id: 2, nombre: "Pastel de Vainilla", precio: 320, imagen: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3" },
+        { id: 3, nombre: "Pastel Red Velvet", precio: 380, imagen: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e" }
+      ],
+      gelatinas: [
+        { id: 4, nombre: "Gelatina de Fresa", precio: 150, imagen: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c" },
+        { id: 5, nombre: "Gelatina Mosaico", precio: 180, imagen: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c" },
+        { id: 6, nombre: "Gelatina de Limón", precio: 160, imagen: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c" }
+      ],
+      pays: [
+        { id: 7, nombre: "Pay de Limón", precio: 280, imagen: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13" },
+        { id: 8, nombre: "Pay de Queso", precio: 300, imagen: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13" },
+        { id: 9, nombre: "Pay de Manzana", precio: 290, imagen: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13" }
+      ]
+    };
+
+    // Función para mostrar secciones
+    function mostrarSeccion(seccion) {
+      // Ocultar todas las secciones
+      const secciones = document.querySelectorAll('main section');
+      secciones.forEach(s => s.style.display = 'none');
+      
+      // Mostrar la sección seleccionada
+      document.getElementById(seccion).style.display = 'block';
+      
+      // Si es productos, mostrar la lista de categorías
+      if (seccion === 'productos') {
+        document.getElementById('categoria-productos').innerHTML = '';
+      }
     }
 
-    function showMainMenu() {
-        // Ocultar todas las secciones
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => section.classList.remove('active'));
-        
-        // Mostrar menú principal
-        document.getElementById('main-menu').style.display = 'block';
-        
-        // Ocultar categorías de productos
-        const categories = ['pasteles', 'gelatinas', 'pays', 'galletas'];
-        categories.forEach(cat => {
-            document.getElementById(cat).style.display = 'none';
-        });
+    // Función para mostrar categorías de productos
+    function mostrarCategoria(categoria) {
+      const container = document.getElementById('categoria-productos');
+      const productosCategoria = productos[categoria];
+      
+      let html = `<h3>Categoría: ${categoria.charAt(0).toUpperCase() + categoria.slice(1)}</h3>`;
+      html += '<div class="productos-lista">';
+      
+      productosCategoria.forEach(producto => {
+        html += `
+          <div class="producto">
+            <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+            <h4>${producto.nombre}</h4>
+            <p class="precio">$${producto.precio}</p>
+            <button onclick="agregarAlCarrito(${producto.id}, '${producto.nombre}', ${producto.precio})">Agregar al Carrito</button>
+          </div>
+        `;
+      });
+      
+      html += '</div>';
+      container.innerHTML = html;
     }
 
-    function showCategory(categoryId) {
-        // Ocultar todas las categorías
-        const categories = ['pasteles', 'gelatinas', 'pays', 'galletas'];
-        categories.forEach(cat => {
-            document.getElementById(cat).style.display = 'none';
-        });
-        
-        // Mostrar categoría seleccionada
-        document.getElementById(categoryId).style.display = 'grid';
+    // Función para agregar productos al carrito
+    function agregarAlCarrito(id, nombre, precio) {
+      const item = carrito.find(item => item.id === id);
+      
+      if (item) {
+        item.cantidad++;
+      } else {
+        carrito.push({ id, nombre, precio, cantidad: 1 });
+      }
+      
+      actualizarCarrito();
+      alert(`${nombre} agregado al carrito`);
     }
 
-    function addToCart(productName, price) {
-        cart.push({ name: productName, price: price });
-        cartTotal += price;
-        updateCartCount();
-        alert(`${productName} agregado al carrito!`);
+    // Función para actualizar el carrito
+    function actualizarCarrito() {
+      const lista = document.getElementById('lista-carrito');
+      const totalElement = document.getElementById('total-carrito');
+      
+      lista.innerHTML = '';
+      total = 0;
+      
+      carrito.forEach(item => {
+        const subtotal = item.precio * item.cantidad;
+        total += subtotal;
+        
+        lista.innerHTML += `
+          <li>
+            ${item.nombre} - Cantidad: ${item.cantidad} - $${subtotal}
+            <button onclick="eliminarDelCarrito(${item.id})" style="margin-left: 1rem; background: #ff6b6b;">Eliminar</button>
+          </li>
+        `;
+      });
+      
+      totalElement.textContent = total;
     }
 
-    function removeFromCart(index) {
-        cartTotal -= cart[index].price;
-        cart.splice(index, 1);
-        updateCartCount();
-        updateCartDisplay();
+    // Función para eliminar del carrito
+    function eliminarDelCarrito(id) {
+      carrito = carrito.filter(item => item.id !== id);
+      actualizarCarrito();
     }
 
-    function updateCartCount() {
-        document.getElementById('cart-count').textContent = cart.length;
+    // Función para descargar ticket
+    function descargarTicket() {
+      if (carrito.length === 0) {
+        alert('El carrito está vacío');
+        return;
+      }
+      
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      doc.setFontSize(20);
+      doc.text('Pastelería Las Nubes', 20, 30);
+      doc.setFontSize(12);
+      doc.text('Ticket de Compra', 20, 45);
+      doc.text('------------------------', 20, 55);
+      
+      let y = 70;
+      carrito.forEach(item => {
+        doc.text(`${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad}`, 20, y);
+        y += 10;
+      });
+      
+      doc.text('------------------------', 20, y + 5);
+      doc.text(`Total: $${total}`, 20, y + 15);
+      doc.text(`Método de pago: ${document.getElementById('metodoPago').value}`, 20, y + 25);
+      
+      doc.save('ticket-pasteleria.pdf');
     }
 
-    function updateCartDisplay() {
-        const cartItemsContainer = document.getElementById('cart-items');
-        const cartTotalElement = document.getElementById('cart-total');
-        
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p>Tu carrito está vacío</p>';
-            cartTotalElement.textContent = 'Total: $0';
-            return;
-        }
-        
-        let cartHTML = '';
-        cart.forEach((item, index) => {
-            cartHTML += `
-                <div class="cart-item">
-                    <div>
-                        <strong>${item.name}</strong><br>
-                        <span class="product-price">$${item.price}</span>
-                    </div>
-                    <button class="remove-btn" onclick="removeFromCart(${index})">Eliminar</button>
-                </div>
-            `;
-        });
-        
-        cartItemsContainer.innerHTML = cartHTML;
-        cartTotalElement.textContent = `Total: $${cartTotal}`;
-    }
-
-    function processPayment(method) {
-        if (cart.length === 0) {
-            alert('Tu carrito está vacío');
-            return;
-        }
-        
-        const methodText = method === 'efectivo' ? 'Efectivo' : 'Tarjeta';
-        alert(`Procesando pago con ${methodText}...`);
-        
-        // Generar ticket PDF
-        generateTicket(method);
-        
-        // Limpiar carrito
-        cart = [];
-        cartTotal = 0;
-        updateCartCount();
-        updateCartDisplay();
-    }
-
-    function generateTicket(paymentMethod) {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        
-        // Configurar el documento
-        doc.setFontSize(20);
-        doc.text('Pastelería Las Nubes', 105, 20, null, null, 'center');
-        
-        doc.setFontSize(12);
-        doc.text('Ticket de Compra', 105, 35, null, null, 'center');
-        doc.text('--------------------------------', 105, 45, null, null, 'center');
-        
-        // Fecha y hora
-        const now = new Date();
-        const dateTime = now.toLocaleString('es-MX');
-        doc.text(`Fecha: ${dateTime}`, 20, 60);
-        
-        // Productos
-        let yPosition = 80;
-        doc.text('Productos:', 20, yPosition);
-        yPosition += 10;
-        
-        cart.forEach(item => {
-            doc.text(`${item.name} - $${item.price}`, 30, yPosition);
-            yPosition += 10;
-        });
-        
-        // Total
-        yPosition += 10;
-        doc.text('--------------------------------', 105, yPosition, null, null, 'center');
-        yPosition += 15;
-        doc.setFontSize(14);
-        doc.text(`TOTAL: $${cartTotal}`, 105, yPosition, null, null, 'center');
-        
-        // Método de pago
-        yPosition += 20;
-        doc.setFontSize(12);
-        const methodText = paymentMethod === 'efectivo' ? 'Efectivo' : 'Tarjeta';
-        doc.text(`Método de pago: ${methodText}`, 105, yPosition, null, null, 'center');
-        
-        // Pie de página
-        yPosition += 30;
-        doc.text('¡Gracias por su compra!', 105, yPosition, null, null, 'center');
-        doc.text('Pastelería Las Nubes', 105, yPosition + 10, null, null, 'center');
-        
-        // Descargar PDF
-        doc.save('ticket-pasteleria-las-nubes.pdf');
-    }
-
-    function sendWhatsAppMessage() {
-        const nombre = document.getElementById('nombre').value;
-        const telefono = document.getElementById('telefono').value;
-        const mensaje = document.getElementById('mensaje').value;
-        
-        if (!nombre || !telefono || !mensaje) {
-            alert('Por favor completa todos los campos');
-            return;
-        }
-        
-        // Número de WhatsApp de la pastelería (cambia por tu número real)
-        const whatsappNumber = '5551234567'; // Cambia este número por el tuyo
-        
-        const fullMessage = `¡Hola! Soy ${nombre}
-```
-
-📞 Mi teléfono: ${telefono}
-
-💬 Mi mensaje:
-${mensaje}
-
-¡Gracias por su atención!
-
-- Enviado desde la página web de Pastelería Las Nubes`;
-  
-  ```
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(fullMessage)}`;
-        
-        // Abrir WhatsApp
-        window.open(whatsappUrl, '_blank');
-        
-        // Limpiar formulario
-        document.getElementById('nombre').value = '';
-        document.getElementById('telefono').value = '';
-        document.getElementById('mensaje').value = '';
-        
-        alert('Te estamos redirigiendo a WhatsApp para enviar tu mensaje 📲');
-    }
-  
-    // Mostrar menú principal al cargar
-    showMainMenu();
-  ```
-  
-    </script>
-
+    // Mostrar inicio al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+      mostrarSeccion('inicio');
+    });
+  </script>
 </body>
 </html>
-divídelo en html, css, script
