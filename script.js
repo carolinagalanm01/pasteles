@@ -14,7 +14,7 @@ const productos = {
   gelatinas: [
     { id: 4, nombre: "Gelatina de Fresa", precio: 150, imagen: "fresa.jpg" },
     { id: 5, nombre: "Gelatina Mosaico", precio: 180, imagen: "mosaico.jpg" },
-    { id: 6, nombre: "Gelatina de Limón", precio: 160, imagen: "lima.jpg" }
+    { id: 6, nombre: "Gelatina de Limón", precio: 160, imagen: "limon.jpg" }
   ],
   pays: [
     { id: 7, nombre: "Pay de Limón", precio: 280, imagen: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13" },
