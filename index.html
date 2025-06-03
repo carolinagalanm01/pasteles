@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastelería Las Nubes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pastelería Las Nubes</h1>
+            <div class="hero-image"></div>
+            <h2>Deliciosos momentos para cada ocasión: pasteles, gelatinas, pays y más.</h2>
+        </div>
+
+```
+    <div id="main-menu">
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="showSection('productos')">Productos</button>
+            <button class="nav-btn" onclick="showSection('eventos')">Eventos</button>
+            <button class="nav-btn" onclick="showSection('sucursales')">Sucursales</button>
+            <button class="nav-btn" onclick="showSection('contacto')">Contáctanos</button>
+            <button class="nav-btn" onclick="showSection('carrito')">Carrito (<span id="cart-count">0</span>)</button>
+        </div>
+    </div>
+
+    <!-- Sección Productos -->
+    <div id="productos" class="section">
+        <h2>Nuestros Productos</h2>
+        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
+        
+        <div class="nav-buttons">
+            <button class="category-btn" onclick="showCategory('pasteles')">Pasteles</button>
+            <button class="category-btn" onclick="showCategory('gelatinas')">Gelatinas</button>
+            <button class="category-btn" onclick="showCategory('pays')">Pays</button>
+            <button class="category-btn" onclick="showCategory('galletas')">Galletas</button>
+        </div>
+
+        <!-- Pasteles -->
+        <div id="pasteles" class="products-grid" style="display: none;">
+            <div class="product-card">
+                <div class="product-image">🍫</div>
+                <div class="product-info">
+                    <h3>Pastel de Chocolate</h3>
+                    <p>Delicioso pastel de chocolate con capas esponjosas y crema de chocolate belga. Perfecto para celebraciones especiales.</p>
+                    <div class="product-price">$450</div>
+                    <button class="add-to-cart" onclick="addToCart('Pastel de Chocolate', 450)">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🥛</div>
+                <div class="product-info">
+                    <h3>Pastel Tres Leches</h3>
+                    <p>Tradicional pastel tres leches con bizcocho suave empapado en tres tipos de leche y cubierto con merengue.</p>
+                    <div class="product-price">$380</div>
+                    <button class="add-to-cart" onclick="addToCart('Pastel Tres Leches', 380)">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🥕</div>
+                <div class="product-info">
+                    <h3>Pastel de Zanahoria</h3>
+                    <p>Pastel húmedo de zanahoria con especias naturales, nueces y cobertura de queso crema con canela.</p>
+                    <div class="product-price">$420</div>
+                    <button class="add-to-cart" onclick="addToCart('Pastel de Zanahoria', 420)">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gelatinas -->
+        <div id="gelatinas" class="products-grid" style="display: none;">
+            <div class="product-card">
+                <div class="product-image">🌈</div>
+                <div class="product-info">
+                    <h3>Gelatina de Mosaico</h3>
+                    <p>Colorida gelatina de mosaico con cubitos de diferentes sabores en una base de leche condensada.</p>
+                    <div class="product-price">$180</div>
+                    <button class="add-to-cart" onclick="addToCart('Gelatina de Mosaico', 180)">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🍓</div>
+                <div class="product-info">
+                    <h3>Gelatina de Fresa</h3>
+                    <p>Refrescante gelatina de fresa natural con trozos de fruta fresca y un toque de crema.</p>
+                    <div class="product-price">$150</div>
+                    <button class="add-to-cart" onclick="addToCart('Gelatina de Fresa', 150)">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pays -->
+        <div id="pays" class="products-grid" style="display: none;">
+            <div class="product-card">
+                <div class="product-image">🍋</div>
+                <div class="product-info">
+                    <h3>Pay de Limón</h3>
+                    <p>Exquisito pay de limón con base crujiente de galleta y relleno cremoso de limón natural con merengue.</p>
+                    <div class="product-price">$320</div>
+                    <button class="add-to-cart" onclick="addToCart('Pay de Limón', 320)">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🧀</div>
+                <div class="product-info">
+                    <h3>Pay de Queso</h3>
+                    <p>Cremoso pay de queso estilo Nueva York con base de galleta graham y topping de frutos rojos.</p>
+                    <div class="product-price">$350</div>
+                    <button class="add-to-cart" onclick="addToCart('Pay de Queso', 350)">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Galletas -->
+        <div id="galletas" class="products-grid" style="display: none;">
+            <div class="product-card">
+                <div class="product-image">🍪</div>
+                <div class="product-info">
+                    <h3>Galletas de Chispas de Chocolate</h3>
+                    <p>Clásicas galletas caseras con chispas de chocolate, crujientes por fuera y suaves por dentro.</p>
+                    <div class="product-price">$80</div>
+                    <button class="add-to-cart" onclick="addToCart('Galletas Chispas Chocolate', 80)">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🥜</div>
+                <div class="product-info">
+                    <h3>Galletas de Avena</h3>
+                    <p>Nutritivas galletas de avena con pasas y canela, perfectas para acompañar tu café o té.</p>
+                    <div class="product-price">$70</div>
+                    <button class="add-to-cart" onclick="addToCart('Galletas de Avena', 70)">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🌰</div>
+                <div class="product-info">
+                    <h3>Galletas de Mantequilla</h3>
+                    <p>Delicadas galletas de mantequilla con un toque de vainilla, perfectas para cualquier ocasión.</p>
+                    <div class="product-price">$75</div>
+                    <button class="add-to-cart" onclick="addToCart('Galletas de Mantequilla', 75)">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Eventos -->
+    <div id="eventos" class="section">
+        <h2>Nuestros Eventos</h2>
+        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
+        
+        <div class="events-grid">
+            <div class="event-card">
+                <div class="event-emoji">🎓</div>
+                <h3>Graduaciones</h3>
+                <p>Hemos participado en más de 150 graduaciones, creando pasteles únicos para celebrar este momento tan especial en la vida de nuestros clientes.</p>
+            </div>
+            <div class="event-card">
+                <div class="event-emoji">🎉</div>
+                <h3>Fiestas</h3>
+                <p>Desde cumpleaños infantiles hasta celebraciones de adultos, hemos endulzado más de 500 fiestas con nuestros deliciosos postres.</p>
+            </div>
+            <div class="event-card">
+                <div class="event-emoji">💒</div>
+                <h3>Bodas</h3>
+                <p>Hemos tenido el honor de crear pasteles de boda únicos para más de 80 parejas, haciendo de su día especial un momento inolvidable.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Sucursales -->
+    <div id="sucursales" class="section">
+        <h2>Nuestras Sucursales</h2>
+        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
+        
+        <div class="sucursales-grid">
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Centro</h4>
+                <p>Av. Juárez #123, Centro Histórico<br>📞 55-1234-5678</p>
+            </div>
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Norte</h4>
+                <p>Blvd. Norte #456, Col. Lindavista<br>📞 55-2345-6789</p>
+            </div>
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Sur</h4>
+                <p>Av. División del Norte #789, Col. Narvarte<br>📞 55-3456-7890</p>
+            </div>
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Oriente</h4>
+                <p>Calz. Ignacio Zaragoza #321, Col. Jardín Balbuena<br>📞 55-4567-8901</p>
+            </div>
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Poniente</h4>
+                <p>Av. Observatorio #654, Col. Tacubaya<br>📞 55-5678-9012</p>
+            </div>
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Polanco</h4>
+                <p>Av. Presidente Masaryk #987, Polanco<br>📞 55-6789-0123</p>
+            </div>
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Roma</h4>
+                <p>Av. Álvaro Obregón #147, Col. Roma Norte<br>📞 55-7890-1234</p>
+            </div>
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Condesa</h4>
+                <p>Av. Amsterdam #258, Col. Condesa<br>📞 55-8901-2345</p>
+            </div>
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Coyoacán</h4>
+                <p>Av. Universidad #369, Col. Coyoacán<br>📞 55-9012-3456</p>
+            </div>
+            <div class="sucursal-card">
+                <h4>🏪 Sucursal Xochimilco</h4>
+                <p>Av. Nuevo León #741, Xochimilco<br>📞 55-0123-4567</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Contacto -->
+    <div id="contacto" class="section">
+        <h2>Contáctanos</h2>
+        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
+        
+        <div class="contact-container">
+            <div class="contact-card">
+                <div class="contact-icon">📱</div>
+                <h3>Síguenos en Redes Sociales</h3>
+                <p>Mantente al día con nuestras últimas creaciones y promociones</p>
+                <a href="https://instagram.com/carolinagalanm" target="_blank" class="social-btn">
+                    📷 Instagram @carolinagalanm
+                </a>
+                <a href="https://facebook.com/Carolina-Galán" target="_blank" class="social-btn facebook">
+                    👥 Facebook Carolina Galán
+                </a>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">💬</div>
+                <h3>Envíanos un Mensaje</h3>
+                <p>¿Tienes alguna pregunta o pedido especial? ¡Escríbenos!</p>
+                
+                <div class="contact-form">
+                    <div class="form-group">
+                        <label for="nombre">Tu Nombre:</label>
+                        <input type="text" id="nombre" placeholder="Escribe tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Tu Teléfono:</label>
+                        <input type="tel" id="telefono" placeholder="10 dígitos">
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Tu Mensaje:</label>
+                        <textarea id="mensaje" rows="4" placeholder="Cuéntanos qué necesitas..."></textarea>
+                    </div>
+                    <button class="whatsapp-btn" onclick="sendWhatsAppMessage()">
+                        📲 Enviar por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-card" style="margin-top: 30px;">
+            <div class="contact-icon">🏪</div>
+            <h3>Información de Contacto</h3>
+            <p><strong>📧 Email:</strong> info@pastelerialasnubes.com</p>
+            <p><strong>📞 Teléfono Principal:</strong> 55-1234-5678</p>
+            <p><strong>🕒 Horarios:</strong> Lunes a Domingo 8:00 AM - 8:00 PM</p>
+            <p><strong>🚚 Entregas a Domicilio</strong> disponibles en toda la ciudad</p>
+        </div>
+    </div>
+
+    <!-- Sección Carrito -->
+    <div id="carrito" class="section">
+        <h2>Tu Carrito de Compras</h2>
+        <button class="back-btn" onclick="showMainMenu()">← Volver al Menú Principal</button>
+        
+        <div id="cart-items"></div>
+        <div class="cart-total" id="cart-total">Total: $0</div>
+        
+        <div class="payment-section">
+            <h3>Método de Pago</h3>
+            <button class="payment-btn" onclick="processPayment('efectivo')">💰 Pagar en Efectivo</button>
+            <button class="payment-btn" onclick="processPayment('tarjeta')">💳 Pagar con Tarjeta</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>
