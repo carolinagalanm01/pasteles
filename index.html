@@ -2,33 +2,107 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pastelería Las Nubes</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <header>
     <h1>Pastelería Las Nubes</h1>
+    <p>Deliciosos momentos para cada ocasión: pasteles, gelatinas, pays y más.</p>
+    <nav>
+      <button onclick="mostrarSeccion('inicio')">Inicio</button>
+      <button onclick="mostrarSeccion('productos')">Productos</button>
+      <button onclick="mostrarSeccion('contacto')">Contáctanos</button>
+      <button onclick="mostrarSeccion('eventos')">Eventos</button>
+      <button onclick="mostrarSeccion('sucursales')">Sucursales</button>
+      <button onclick="mostrarSeccion('carrito')">Carrito</button>
+    </nav>
   </header>
 
   <main>
-    <section class="productos" id="productos">
-      <!-- Productos generados por JavaScript -->
+    <section id="inicio">
+      <img src="chicola.jpg" alt="Pastelería Las Nubes"/>
     </section>
 
-    <section class="carrito">
+    <section id="productos" style="display:none;">
+      <h2>Nuestros Productos</h2>
+      <div class="categoria-botones">
+        <button onclick="mostrarCategoria('pasteles')">Pasteles</button>
+        <button onclick="mostrarCategoria('gelatinas')">Gelatinas</button>
+        <button onclick="mostrarCategoria('pays')">Pays</button>
+      </div>
+      <div id="categoria-productos" class="productos-lista"></div>
+      <button onclick="mostrarSeccion('productos')">Regresar</button>
+    </section>
+
+    <section id="contacto" style="display:none;">
+      <div class="contacto-container">
+        <h2>Contáctanos</h2>
+        <p>¡Estamos aquí para hacer realidad tus dulces sueños!</p>
+        <p>Contáctanos por cualquiera de nuestros medios:</p>
+        
+        <div class="contacto-botones">
+          <a href="https://instagram.com/carolinagalanm" target="_blank" class="contacto-btn instagram">
+            📷 Instagram
+            <br><small>@carolinagalanm</small>
+          </a>
+          
+          <a href="https://facebook.com/search/top?q=Carolina%20Galan" target="_blank" class="contacto-btn facebook">
+            📘 Facebook
+            <br><small>Carolina Galan</small>
+          </a>
+          
+          <a href="https://wa.me/527791253908?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20sus%20productos%20de%20pastelería" target="_blank" class="contacto-btn whatsapp">
+            📱 WhatsApp
+            <br><small>779-125-3908</small>
+          </a>
+        </div>
+        
+        <p style="margin-top: 2rem; color: #667eea; font-weight: bold;">
+          ¡Haz clic en cualquier botón para contactarnos directamente!
+        </p>
+      </div>
+    </section>
+
+    <section id="eventos" style="display:none;">
+      <h2>Eventos Especiales</h2>
+      <div class="evento">
+        <h3>Graduación</h3>
+        <img src="https://images.unsplash.com/photo-1559628233-3e3e718f13fc" alt="Graduación" />
+      </div>
+      <div class="evento">
+        <h3>Cumpleaños</h3>
+        <img src="https://images.unsplash.com/photo-1608534508750-197ef62f3e79" alt="Cumpleaños" />
+      </div>
+      <div class="evento">
+        <h3>Boda</h3>
+        <img src="https://images.unsplash.com/photo-1607082349566-18739d6cfb3a" alt="Boda" />
+      </div>
+    </section>
+
+    <section id="sucursales" style="display:none;">
+      <h2>Nuestras Sucursales</h2>
+      <ul>
+        <li>Sucursal Centro - Calle 123</li>
+        <li>Sucursal Norte - Av. Reforma 456</li>
+        <li>Sucursal Sur - Calle 789</li>
+      </ul>
+    </section>
+
+    <section id="carrito" style="display:none;">
       <h2>Carrito de Compras</h2>
-      <ul id="carrito-lista"></ul>
-      <p id="total">Total: $0.00</p>
-      <button onclick="descargarTicket()">Descargar Ticket (PDF)</button>
-      <select id="metodo-pago">
-        <option value="">Selecciona método de pago</option>
-        <option value="efectivo">Efectivo</option>
-        <option value="tarjeta">Tarjeta</option>
+      <ul id="lista-carrito" class="lista-carrito"></ul>
+      <p class="total">Total: $<span id="total-carrito">0</span></p>
+      <label for="metodoPago">Selecciona tu método de pago:</label>
+      <select id="metodoPago">
+        <option value="Efectivo">Efectivo</option>
+        <option value="Tarjeta">Tarjeta</option>
       </select>
+      <button onclick="descargarTicket()">Descargar Ticket en PDF</button>
     </section>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
