@@ -38,34 +38,48 @@
       <button onclick="mostrarSeccion('productos')">Regresar</button>
     </section>
 
-    <section id="contacto" style="display:none;">
-      <div class="contacto-container">
-        <h2>Contáctanos</h2>
-        <p>¡Estamos aquí para hacer realidad tus dulces sueños!</p>
-        <p>Contáctanos por cualquiera de nuestros medios:</p>
-        
-        <div class="contacto-botones">
-          <a href="https://instagram.com/carolinagalanm" target="_blank" class="contacto-btn instagram">
-            📷 Instagram
-            <br><small>@carolinagalanm</small>
-          </a>
-          
-          <a href="https://facebook.com/search/top?q=Carolina%20Galan" target="_blank" class="contacto-btn facebook">
-            📘 Facebook
-            <br><small>Carolina Galan</small>
-          </a>
-          
-          <a href="https://wa.me/527791253908?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20sus%20productos%20de%20pastelería" target="_blank" class="contacto-btn whatsapp">
-            📱 WhatsApp
-            <br><small>779-125-3908</small>
-          </a>
-        </div>
-        
-        <p style="margin-top: 2rem; color: #667eea; font-weight: bold;">
-          ¡Haz clic en cualquier botón para contactarnos directamente!
-        </p>
-      </div>
-    </section>
+<section id="contacto" style="display:none;">
+  <div class="contacto-container">
+    <h2>Contáctanos</h2>
+    <p>¡Estamos aquí para hacer realidad tus dulces sueños!</p>
+    <p>Contáctanos por cualquiera de nuestros medios:</p>
+    
+    <div class="contacto-botones">
+      <a href="https://instagram.com/carolinagalanm" target="_blank" class="contacto-btn instagram">
+        📷 Instagram
+        <br><small>@carolinagalanm</small>
+      </a>
+      
+      <a href="https://facebook.com/search/top?q=Carolina%20Galan" target="_blank" class="contacto-btn facebook">
+        📘 Facebook
+        <br><small>Carolina Galan</small>
+      </a>
+      
+      <a href="https://wa.me/527791253908?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20sus%20productos%20de%20pastelería" target="_blank" class="contacto-btn whatsapp">
+        📱 WhatsApp
+        <br><small>779-125-3908</small>
+      </a>
+    </div>
+
+    <p style="margin-top: 2rem; color: #667eea; font-weight: bold;">
+      ¡Haz clic en cualquier botón para contactarnos directamente!
+    </p>
+
+    <h3 style="margin-top: 3rem; color: #667eea;">Envíanos tu opinión</h3>
+    <form action="https://formspree.io/f/mwpbkrjr" method="POST" style="margin-top: 1rem; max-width: 500px; margin-inline: auto; text-align: left;">
+      <label for="nombre">Nombre:</label><br>
+      <input type="text" id="nombre" name="nombre" required style="width: 100%; margin-bottom: 1rem;"><br>
+
+      <label for="email">Correo electrónico:</label><br>
+      <input type="email" id="email" name="email" required style="width: 100%; margin-bottom: 1rem;"><br>
+
+      <label for="mensaje">Tu mensaje:</label><br>
+      <textarea id="mensaje" name="mensaje" rows="5" required style="width: 100%; margin-bottom: 1rem;"></textarea><br>
+
+      <button type="submit" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 100%;">Enviar Opinión</button>
+    </form>
+  </div>
+</section>
 
     <section id="eventos" style="display:none;">
       <h2>Eventos Especiales</h2>
