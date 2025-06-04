@@ -286,8 +286,114 @@ actualizarCarrito();
 }
 }
 
+// Funciones de navegación adicionales
+function irAInicio() {
+mostrarSeccion(‘inicio’);
+}
+
+function irAProductos() {
+mostrarSeccion(‘productos’);
+}
+
+function irAContacto() {
+mostrarSeccion(‘contacto’);
+}
+
+function irAEventos() {
+mostrarSeccion(‘eventos’);
+}
+
+function irASucursales() {
+mostrarSeccion(‘sucursales’);
+}
+
+function irACarrito() {
+mostrarSeccion(‘carrito’);
+}
+
+function irAPaquetes() {
+mostrarSeccion(‘paquetes-evento’);
+}
+
+// Función mejorada para mostrar secciones con validación
+function mostrarSeccion(id) {
+console.log(‘Mostrando sección:’, id);
+
+// Ocultar todas las secciones
+const secciones = document.querySelectorAll(‘main > section’);
+secciones.forEach(sec => {
+sec.style.display = ‘none’;
+});
+
+// Mostrar la sección solicitada
+const seccion = document.getElementById(id);
+if (seccion) {
+seccion.style.display = ‘block’;
+console.log(‘Sección mostrada exitosamente:’, id);
+} else {
+console.error(‘No se encontró la sección con id:’, id);
+// Mostrar mensaje de error al usuario
+alert(`Error: No se encontró la sección "${id}". Verifica que exista en el HTML.`);
+return;
+}
+
+// Lógica especial para la sección productos
+if (id === ‘productos’) {
+const contenedor = document.getElementById(‘categoria-productos’);
+if (contenedor && !contenedor.hasChildNodes()) {
+contenedor.innerHTML = ‘<p style="text-align: center; color: #666; margin-top: 20px;">Selecciona una categoría para ver los productos disponibles.</p>’;
+}
+}
+
+// Actualizar el estado activo en la navegación (si existe)
+actualizarNavegacionActiva(id);
+}
+
+// Función opcional para marcar el botón activo en la navegación
+function actualizarNavegacionActiva(seccionActiva) {
+// Remover clase activa de todos los botones de navegación
+const botonesNav = document.querySelectorAll(‘nav button, nav a, .nav-button’);
+botonesNav.forEach(btn => {
+btn.classList.remove(‘activo’);
+});
+
+// Agregar clase activa al botón correspondiente (si existe)
+const btnActivo = document.querySelector(`[onclick*="${seccionActiva}"], [href="#${seccionActiva}"]`);
+if (btnActivo) {
+btnActivo.classList.add(‘activo’);
+}
+}
+
+// Función para validar que todas las secciones existen
+function validarSecciones() {
+const seccionesRequeridas = [‘inicio’, ‘productos’, ‘contacto’, ‘eventos’, ‘sucursales’, ‘carrito’];
+const seccionesFaltantes = [];
+
+seccionesRequeridas.forEach(seccion => {
+if (!document.getElementById(seccion)) {
+seccionesFaltantes.push(seccion);
+}
+});
+
+if (seccionesFaltantes.length > 0) {
+console.warn(‘Secciones faltantes en el HTML:’, seccionesFaltantes);
+}
+
+return seccionesFaltantes.length === 0;
+}
+
 // Mostrar la sección de inicio por defecto al cargar
 window.onload = () => {
+console.log(‘Página cargada, inicializando…’);
+
+// Validar que las secciones existen
+validarSecciones();
+
+// Mostrar sección inicial
 mostrarSeccion(‘inicio’);
-actualizarCarrito(); // Inicializar el carrito vacío
+
+// Inicializar el carrito vacío
+actualizarCarrito();
+
+console.log(‘Inicialización completada’);
 };
