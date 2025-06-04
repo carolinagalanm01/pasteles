@@ -115,4 +115,36 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  margin-bottom
+  margin-bottom: 2rem;
+}
+
+/* NUEVO: Estilo para cada producto */
+.producto {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* NUEVO: Imágenes uniformes */
+.producto img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+/* NUEVO: Títulos y descripciones */
+.producto h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.producto p {
+  font-size: 0.95rem;
+  color: #666;
+}
