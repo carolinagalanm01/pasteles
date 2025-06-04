@@ -1,5 +1,3 @@
-// script.js
-
 // Variables globales
 let carrito = [];
 let total = 0;
@@ -22,18 +20,19 @@ const productos = {
   ]
 };
 
-// Función para mostrar una sección y ocultar las demás
-function mostrarSeccion(seccionId) {
-  const secciones = document.querySelectorAll('main section');
-  secciones.forEach(sec => {
-    sec.style.display = (sec.id === seccionId) ? 'block' : 'none';
-  });
-  if (seccionId === 'productos') {
-    document.getElementById('categoria-productos').innerHTML = ''; // limpiar productos al mostrar sección
+// Mostrar una sección y ocultar las demás
+function mostrarSeccion(id) {
+  const secciones = document.querySelectorAll('main > section');
+  secciones.forEach(sec => sec.style.display = 'none');
+  const seccion = document.getElementById(id);
+  if (seccion) seccion.style.display = 'block';
+
+  if (id === 'productos') {
+    document.getElementById('categoria-productos').innerHTML = '';
   }
 }
 
-// Función para mostrar productos de una categoría
+// Mostrar productos por categoría
 function mostrarCategoria(categoria) {
   const contenedor = document.getElementById('categoria-productos');
   contenedor.innerHTML = '';
@@ -46,32 +45,68 @@ function mostrarCategoria(categoria) {
       <img src="${producto.imagen}" alt="${producto.nombre}" style="width:100%; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" />
       <h3>${producto.nombre}</h3>
       <p>Precio: $${producto.precio}</p>
-      <button onclick="agregarAlCarrito(${producto.id}, '${categoria}')">Agregar al carrito</button>
+      <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
     `;
     contenedor.appendChild(div);
   });
+
+  mostrarSeccion('productos');
 }
 
-// Función para agregar producto al carrito
-function agregarAlCarrito(id, categoria) {
-  const producto = productos[categoria].find(p => p.id === id);
-  if (producto) {
-    carrito.push(producto);
-    actualizarCarrito();
-    alert(`${producto.nombre} agregado al carrito`);
-  }
+// Mostrar paquetes para eventos
+function mostrarPaquete(tipo) {
+  const contenedor = document.getElementById('contenido-paquete');
+  contenedor.innerHTML = '';
+
+  const paquetes = {
+    graduacion: [
+      { nombre: 'Pastel de Birrete', imagen: 'pastel_graduacion.jpg', precio: 500 },
+      { nombre: 'Mini Gelatinas Temáticas', imagen: 'gelatina_graduacion.jpg', precio: 200 }
+    ],
+    cumpleaños: [
+      { nombre: 'Pastel de Ositos', imagen: 'pastel_osos.jpg', precio: 400 },
+      { nombre: 'Cupcakes de Colores', imagen: 'cupcakes.jpg', precio: 180 }
+    ],
+    boda: [
+      { nombre: 'Pastel Elegante de Boda', imagen: 'pastel_boda.jpg', precio: 1000 },
+      { nombre: 'Mesa de Postres Blancos', imagen: 'mesa_boda.jpg', precio: 700 }
+    ]
+  };
+
+  paquetes[tipo].forEach(producto => {
+    const div = document.createElement('div');
+    div.classList.add('paquete-item');
+
+    div.innerHTML = `
+      <h3>${producto.nombre}</h3>
+      <img src="${producto.imagen}" alt="${producto.nombre}" style="width:200px;" />
+      <p>Precio: $${producto.precio}</p>
+      <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+    `;
+    contenedor.appendChild(div);
+  });
+
+  mostrarSeccion('paquetes-evento');
 }
 
-// Actualizar la lista y total del carrito en la sección carrito
+// Agregar producto o paquete al carrito
+function agregarAlCarrito(nombre, precio) {
+  carrito.push({ nombre, precio });
+  actualizarCarrito();
+  alert(`${nombre} agregado al carrito`);
+}
+
+// Actualizar vista del carrito
 function actualizarCarrito() {
   const lista = document.getElementById('lista-carrito');
+  const totalSpan = document.getElementById('total-carrito');
   lista.innerHTML = '';
-
   total = 0;
+
   carrito.forEach((producto, index) => {
     const li = document.createElement('li');
     li.textContent = `${producto.nombre} - $${producto.precio}`;
-    // Agregar botón para eliminar del carrito
+
     const btnEliminar = document.createElement('button');
     btnEliminar.textContent = 'Eliminar';
     btnEliminar.style.marginLeft = '10px';
@@ -79,15 +114,16 @@ function actualizarCarrito() {
       carrito.splice(index, 1);
       actualizarCarrito();
     };
+
     li.appendChild(btnEliminar);
     lista.appendChild(li);
     total += producto.precio;
   });
 
-  document.getElementById('total-carrito').textContent = total.toFixed(2);
+  totalSpan.textContent = total.toFixed(2);
 }
 
-// Función para descargar ticket en PDF usando jsPDF
+// Descargar ticket PDF usando jsPDF
 function descargarTicket() {
   if (carrito.length === 0) {
     alert('El carrito está vacío');
@@ -109,74 +145,11 @@ function descargarTicket() {
 
   doc.text(`Total: $${total.toFixed(2)}`, 14, y + 10);
 
-  const metodoPago = document.getElementById('metodoPago').value;
+  const metodoPago = document.getElementById('metodoPago').value || "No especificado";
   doc.text(`Método de pago: ${metodoPago}`, 14, y + 20);
 
   doc.save('ticket.pdf');
 }
 
-// Inicializar mostrando solo la sección inicio
-mostrarSeccion('inicio');
-function mostrarSeccion(id) {
-  const secciones = document.querySelectorAll('main > section');
-  secciones.forEach(sec => sec.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
-}
-
-function mostrarPaquete(tipo) {
-  const contenedor = document.getElementById('contenido-paquete');
-  contenedor.innerHTML = ''; // Limpia el contenido anterior
-
-  let paquetes = {
-    graduacion: [
-      { nombre: 'Pastel de Birrete', imagen: 'pastel_graduacion.jpg', precio: 500 },
-      { nombre: 'Mini Gelatinas Temáticas', imagen: 'gelatina_graduacion.jpg', precio: 200 }
-    ],
-    cumpleaños: [
-      { nombre: 'Pastel de Ositos', imagen: 'pastel_osos.jpg', precio: 400 },
-      { nombre: 'Cupcakes de Colores', imagen: 'cupcakes.jpg', precio: 180 }
-    ],
-    boda: [
-      { nombre: 'Pastel Elegante de Boda', imagen: 'pastel_boda.jpg', precio: 1000 },
-      { nombre: 'Mesa de Postres Blancos', imagen: 'mesa_boda.jpg', precio: 700 }
-    ]
-  };
-
-  paquetes[tipo].forEach(producto => {
-    const div = document.createElement('div');
-    div.className = 'paquete-item';
-    div.innerHTML = `
-      <h3>${producto.nombre}</h3>
-      <img src="${producto.imagen}" style="width:200px;" />
-      <p>Precio: $${producto.precio}</p>
-      <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
-    `;
-    contenedor.appendChild(div);
-  });
-
-  mostrarSeccion('paquetes-evento');
-}
-
-let carrito = [];
-
-function agregarAlCarrito(nombre, precio) {
-  carrito.push({ nombre, precio });
-  actualizarCarrito();
-}
-
-function actualizarCarrito() {
-  const lista = document.getElementById('lista-carrito');
-  const total = document.getElementById('total-carrito');
-  lista.innerHTML = '';
-  let suma = 0;
-
-  carrito.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = `${item.nombre} - $${item.precio}`;
-    lista.appendChild(li);
-    suma += item.precio;
-  });
-
-  total.textContent = suma;
-}
-
+// Mostrar la sección de inicio por defecto al cargar
+window.onload = () => mostrarSeccion('inicio');
