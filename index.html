@@ -82,20 +82,28 @@
 </section>
 
     <section id="eventos" style="display:none;">
-      <h2>Eventos Especiales</h2>
-      <div class="evento">
-        <h3>Graduación</h3>
-        <img src="graduacion.jpg" />
-      </div>
-      <div class="evento">
-        <h3>Cumpleaños</h3>
-        <img src="osos.jpg" />
-      </div>
-      <div class="evento">
-        <h3>Boda</h3>
-        <img src="jardin.jpg" />
-      </div>
-    </section>
+  <h2>Eventos Especiales</h2>
+  <div class="evento" onclick="mostrarPaquete('graduacion')">
+    <h3>Graduación</h3>
+    <img src="graduacion.jpg" />
+  </div>
+  <div class="evento" onclick="mostrarPaquete('cumpleaños')">
+    <h3>Cumpleaños</h3>
+    <img src="osos.jpg" />
+  </div>
+  <div class="evento" onclick="mostrarPaquete('boda')">
+    <h3>Boda</h3>
+    <img src="jardin.jpg" />
+  </div>
+</section>
+
+<!-- NUEVA SECCIÓN PARA MOSTRAR LOS PAQUETES -->
+<section id="paquetes-evento" style="display:none;">
+  <h2>Paquete Especial</h2>
+  <div id="contenido-paquete"></div>
+  <button onclick="mostrarSeccion('eventos')">Regresar a Eventos</button>
+</section>
+
 
     <section id="sucursales" style="display:none;">
       <h2>Nuestras Sucursales</h2>
