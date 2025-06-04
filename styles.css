@@ -69,6 +69,18 @@ section {
   backdrop-filter: blur(10px);
 }
 
+/* Estilo global para todas las imágenes dentro de secciones */
+section img {
+  width: 100%;
+  max-width: 600px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin: 0 auto 1.5rem auto;
+}
+
 #inicio img {
   width: 100%;
   max-width: 600px;
@@ -118,7 +130,7 @@ h2 {
   margin-bottom: 2rem;
 }
 
-/* NUEVO: Estilo para cada producto */
+/* Estilo para cada producto */
 .producto {
   background: white;
   border-radius: 15px;
@@ -128,7 +140,7 @@ h2 {
   padding: 1rem;
 }
 
-/* NUEVO: Imágenes uniformes */
+/* Imágenes uniformes dentro de productos */
 .producto img {
   width: 100%;
   height: 200px;
@@ -137,7 +149,7 @@ h2 {
   margin-bottom: 1rem;
 }
 
-/* NUEVO: Títulos y descripciones */
+/* Títulos y descripciones */
 .producto h3 {
   font-size: 1.2rem;
   color: #333;
