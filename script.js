@@ -38,25 +38,46 @@ contenedor.innerHTML = ‘<p style="text-align: center; color: #666; margin-top:
 
 // Mostrar productos por categoría
 function mostrarCategoria(categoria) {
+console.log(‘Intentando mostrar categoría:’, categoria); // Debug
+
 const contenedor = document.getElementById(‘categoria-productos’);
 if (!contenedor) {
 console.error(‘No se encontró el contenedor categoria-productos’);
+alert(‘Error: No se encontró el contenedor de productos. Verifica que el HTML tenga el elemento con id=“categoria-productos”’);
 return;
 }
 
+console.log(‘Contenedor encontrado, limpiando…’); // Debug
 contenedor.innerHTML = ‘’;
 
 if (!productos[categoria]) {
+console.error(‘Categoría no encontrada:’, categoria);
 contenedor.innerHTML = ‘<p>Categoría no encontrada</p>’;
 return;
 }
 
-productos[categoria].forEach(producto => {
-const div = document.createElement(‘div’);
-div.classList.add(‘producto’);
-div.style.cssText = `border: 1px solid #ddd; border-radius: 10px; padding: 15px; margin: 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background: white; display: inline-block; width: 250px; vertical-align: top;`;
+console.log(‘Productos de la categoría:’, productos[categoria]); // Debug
+
+// Crear el contenedor de productos con flexbox
+contenedor.style.cssText = `display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;`;
+
+productos[categoria].forEach((producto, index) => {
+console.log(`Creando producto ${index}:`, producto.nombre); // Debug
 
 ```
+const div = document.createElement('div');
+div.classList.add('producto');
+div.style.cssText = `
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  background: white;
+  width: 250px;
+  flex-shrink: 0;
+`;
+
 div.innerHTML = `
   <img src="${producto.imagen}" alt="${producto.nombre}" 
        style="width:100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" 
@@ -73,9 +94,11 @@ contenedor.appendChild(div);
 
 });
 
+console.log(‘Productos agregados al contenedor’); // Debug
+
 // Asegurar que la sección productos esté visible
 mostrarSeccion(‘productos’);
-}
+console.log(‘Sección productos mostrada’); // Debug
 
 // Mostrar paquetes para eventos (con imágenes corregidas)
 function mostrarPaquete(tipo) {
@@ -141,7 +164,9 @@ mensaje.textContent = `✓ ${nombre} agregado al carrito`;
 document.body.appendChild(mensaje);
 
 setTimeout(() => {
-documento.body.removeChild(mensaje);
+if (document.body.contains(mensaje)) {
+document.body.removeChild(mensaje);
+}
 }, 3000);
 }
 
