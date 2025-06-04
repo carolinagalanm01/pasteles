@@ -117,3 +117,66 @@ function descargarTicket() {
 
 // Inicializar mostrando solo la sección inicio
 mostrarSeccion('inicio');
+function mostrarSeccion(id) {
+  const secciones = document.querySelectorAll('main > section');
+  secciones.forEach(sec => sec.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+}
+
+function mostrarPaquete(tipo) {
+  const contenedor = document.getElementById('contenido-paquete');
+  contenedor.innerHTML = ''; // Limpia el contenido anterior
+
+  let paquetes = {
+    graduacion: [
+      { nombre: 'Pastel de Birrete', imagen: 'pastel_graduacion.jpg', precio: 500 },
+      { nombre: 'Mini Gelatinas Temáticas', imagen: 'gelatina_graduacion.jpg', precio: 200 }
+    ],
+    cumpleaños: [
+      { nombre: 'Pastel de Ositos', imagen: 'pastel_osos.jpg', precio: 400 },
+      { nombre: 'Cupcakes de Colores', imagen: 'cupcakes.jpg', precio: 180 }
+    ],
+    boda: [
+      { nombre: 'Pastel Elegante de Boda', imagen: 'pastel_boda.jpg', precio: 1000 },
+      { nombre: 'Mesa de Postres Blancos', imagen: 'mesa_boda.jpg', precio: 700 }
+    ]
+  };
+
+  paquetes[tipo].forEach(producto => {
+    const div = document.createElement('div');
+    div.className = 'paquete-item';
+    div.innerHTML = `
+      <h3>${producto.nombre}</h3>
+      <img src="${producto.imagen}" style="width:200px;" />
+      <p>Precio: $${producto.precio}</p>
+      <button onclick="agregarAlCarrito('${producto.nombre}', ${producto.precio})">Agregar al carrito</button>
+    `;
+    contenedor.appendChild(div);
+  });
+
+  mostrarSeccion('paquetes-evento');
+}
+
+let carrito = [];
+
+function agregarAlCarrito(nombre, precio) {
+  carrito.push({ nombre, precio });
+  actualizarCarrito();
+}
+
+function actualizarCarrito() {
+  const lista = document.getElementById('lista-carrito');
+  const total = document.getElementById('total-carrito');
+  lista.innerHTML = '';
+  let suma = 0;
+
+  carrito.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.nombre} - $${item.precio}`;
+    lista.appendChild(li);
+    suma += item.precio;
+  });
+
+  total.textContent = suma;
+}
+
