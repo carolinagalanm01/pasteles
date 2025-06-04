@@ -234,3 +234,11 @@ font-size: 1.2rem;
 color: #444;
 line-height: 1.7;
 }
+.paquete-item {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
