@@ -18,7 +18,7 @@ const productos = {
   ],
   pays: [
     { id: 7, nombre: "Pay de Limón", precio: 280, imagen: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13" },
-    { id: 8, nombre: "Pay de Queso", precio: 300, imagen: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13" }
+    { id: 8, nombre: "Pay de Queso", precio: 300, imagen: "queso.jpg" }
   ]
 };
 
