@@ -12,9 +12,9 @@ const productos = {
     { id: 3, nombre: "Pastel Red Velvet", precio: 380, imagen: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e" }
   ],
   gelatinas: [
-    { id: 4, nombre: "Gelatina de Fresa", precio: 150, imagen: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c" },
-    { id: 5, nombre: "Gelatina Mosaico", precio: 180, imagen: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c" },
-    { id: 6, nombre: "Gelatina de Limón", precio: 160, imagen: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c" }
+    { id: 4, nombre: "Gelatina de Fresa", precio: 150, imagen: "fresa.jpg" },
+    { id: 5, nombre: "Gelatina Mosaico", precio: 180, imagen: "mosaico.jpg" },
+    { id: 6, nombre: "Gelatina de Limón", precio: 160, imagen: "limon.jpg" }
   ],
   pays: [
     { id: 7, nombre: "Pay de Limón", precio: 280, imagen: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13" },
